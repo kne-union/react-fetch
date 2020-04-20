@@ -1,0 +1,56 @@
+{
+  "name": "@kne/react-fetch",
+  "version": "0.0.1",
+  "description": "用于表单验证的react组件",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "jsnext:main": "dist/index.es.js",
+  "browser": "dist/react-fetch.min.js",
+  "umd": "dist/react-fetch.js",
+  "scripts": {
+    "build": "rollup -c",
+    "start-demo": "cd example&&npm start",
+    "start": "rollup -c -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kne-union/react-fetch.git"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "react",
+    "form",
+    "validate"
+  ],
+  "author": "linzp",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kne-union/react-fetch/issues"
+  },
+  "homepage": "https://github.com/kne-union/react-fetch#readme",
+  "peerDependencies": {
+    "prop-types": "15.x",
+    "react": "16.x",
+    "react-dom": "16.x",
+    "axios": "^0.19.2"
+  },
+  "dependencies": {
+    "lodash": "^4.17.15",
+    "object-hash": "^2.0.3"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.7.6",
+    "@babel/preset-env": "^7.7.7",
+    "@rollup/plugin-json": "^4.0.3",
+    "babel-preset-react-app": "^9.1.0",
+    "rollup": "^1.27.14",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-css-bundle": "^1.0.4",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-peer-deps-external": "^2.2.2",
+    "rollup-plugin-terser": "^5.3.0"
+  }
+}
