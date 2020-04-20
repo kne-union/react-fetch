@@ -39,7 +39,7 @@ export default [
                 sourcemap: true
             },
             {
-                file: pkg.browser,
+                file: pkg['umd:min'],
                 name: "ReactFetch",
                 format: 'umd',
                 sourcemap: true,

@@ -1,11 +1,11 @@
 {
   "name": "@kne/react-fetch",
-  "version": "0.0.1",
+  "version": "0.1.1",
   "description": "用于表单验证的react组件",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
-  "browser": "dist/react-fetch.min.js",
+  "umd:min": "dist/react-fetch.min.js",
   "umd": "dist/react-fetch.js",
   "scripts": {
     "build": "rollup -c",
