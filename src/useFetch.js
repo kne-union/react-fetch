@@ -3,7 +3,7 @@ import useState from './useSafeState';
 import {globalParams} from './preset';
 
 export default ({url, data, options}, ref) => {
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const [results, setResults] = useState({});
     const [errorMsg, setErrorMsg] = useState();
     const send = useCallback(() => {
