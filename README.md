@@ -175,7 +175,7 @@ options
 
 |属性名|说明|类型|默认值|
 |  ---  | ---  | --- | --- |
-|ajax|axios实例｜obj|-|
+|ajax|axios实例|obj|-|
 |loading|在请求发出后没有返回结果时渲染的组件|jsx|null|
 |error|请求返回后code不为200时渲染的组件，如果传入函数，参数中会接收到请求返回的错误msg|jsx&#124;func|null|
 |empty|请求未发出时渲染的组件|jsx|null|
