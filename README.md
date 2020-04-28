@@ -7,7 +7,15 @@ npm i @kne/react-fetch
 
 # 使用示例
 ```jsx
-import Fetch,{useFetch,useFetchAll,withFetch,withFetchAll,createWithFetch,createWithFetchAll,preset} from '@kne/react-fetch'
+import Fetch,{
+  useFetch,
+  useFetchAll,
+  withFetch,
+  withFetchAll,
+  createWithFetch,
+  createWithFetchAll,
+  preset
+} from '@kne/react-fetch'
 
 const RenderComponent = ({data,refresh})=>{
     //当请求返回正常，可以拿到data值
