@@ -79,7 +79,7 @@ fetchReset({
 
 # API
 
-* Fetch
+#### Fetch
 
 |属性名|说明|类型|默认值|
 |  ---  | ---  | --- | --- |
@@ -93,7 +93,7 @@ fetchReset({
 |component|请求返回成功时需要渲染的组件|React Component|-|
 |render|请求返回成功时执行的方法，改方法需要返回jsx，参数可以拿到{data,refresh}，当存在component时改方法不会被执行|func|-|
 
-* FetchAll
+#### FetchAll
 
 |属性名|说明|类型|默认值|
 |  ---  | ---  | --- | --- |
@@ -105,15 +105,15 @@ fetchReset({
 |component|请求返回成功时需要渲染的组件|React Component|-|
 |render|请求返回成功时执行的方法，改方法需要返回jsx，参数可以拿到{data,refresh}，当存在component时改方法不会被执行|func|-|
 
-* withFetch 高阶组件 Fetch组件的封装 withFetch(WrappedComponent) WrappedComponent为一个React Component,等价于给Fetch传入component参数
+#### withFetch 高阶组件 Fetch组件的封装 withFetch(WrappedComponent) WrappedComponent为一个React Component,等价于给Fetch传入component参数
 
-* withFetchAll 高阶组件 FetchAll组件的封装 withFetchAll(WrappedComponent) WrappedComponent为一个React Component,等价于给FetchAll传入component参数
+#### withFetchAll 高阶组件 FetchAll组件的封装 withFetchAll(WrappedComponent) WrappedComponent为一个React Component,等价于给FetchAll传入component参数
 
-* createWithFetch withFetch的高阶函数，可以将部分参数提前传入，不必在调用withFetch(WrappedComponent) 时再传入参数
+#### createWithFetch withFetch的高阶函数，可以将部分参数提前传入，不必在调用withFetch(WrappedComponent) 时再传入参数
 
-* createWithFetchAll withFetchAll的高阶函数，可以将部分参数提前传入，不必在调用withFetchAll(WrappedComponent) 时再传入参数
+#### createWithFetchAll withFetchAll的高阶函数，可以将部分参数提前传入，不必在调用withFetchAll(WrappedComponent) 时再传入参数
 
-* useFetch React Hooks 
+#### useFetch React Hooks 
 
 参数 useFetch(options)
 
@@ -136,7 +136,7 @@ options:
 |results|当前组件的请求返回数据|-|
 |refresh|可以调用它手动重新发送请求的方法|func|
 
-* useFetchAll React Hooks 
+#### useFetchAll React Hooks 
 
 参数 useFetchAll(options)
 
@@ -157,7 +157,7 @@ options:
 |results|当前组件的请求返回数据|-|
 |refresh|可以调用它手动重新发送请求的方法|func|
 
-* preset 预制设置的方法 preset(options)
+#### preset 预制设置的方法 preset(options)
 
 options
 
