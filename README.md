@@ -133,7 +133,7 @@ options:
 |  ---  | ---  | --- | --- |
 |url|需要请求接口的url|string|- |
 |data|POST请求的data|obj| - |
-|options|请求的其他参数，如method,headers等，详细请参考[axios](https://github.com/axios/axios)| - |
+|options|请求的其他参数，如method,headers等，详细请参考[axios](https://github.com/axios/axios)｜obj| - |
 |auto|是否自动发送请求，如果为false需要手动调用refresh方法才会发送请求，并且url,data,options发生变化后不会自动发送新的请求|bool|true|
 
 返回值 {isLoading, isComplete, errorMsg, results, refresh}
