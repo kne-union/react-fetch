@@ -12,17 +12,36 @@ import Fetch,{useFetch,useFetchAll,withFetch,withFetchAll,createWithFetch,create
 const RenderComponent = ({data,refresh})=>{
     //当请求返回正常，可以拿到data值
 };
-React.render(<Fetch url="/api/***" data={{...}} options={{method:"POST",headers:{....}}} component={RenderComponent}/>,root);
+React.render(
+  <Fetch url="/api/***" 
+         data={{...}} 
+         options={{method:"POST",headers:{....}}} 
+         component={RenderComponent}/>
+  ,root);
 
 const FetchRenderComponent = withFetch(RenderComponent);
 
-React.render(<FetchRenderComponent url="/api/***" data={{...}} options={{method:"POST",headers:{....}}} component={RenderComponent}/>, root);
+React.render(
+  <FetchRenderComponent 
+       url="/api/***" 
+       data={{...}} 
+       options={{method:"POST",headers:{....}}} 
+       component={RenderComponent}/>
+   , root);
 
-React.render(<FetchAll fetchers={[{url:'api1',data:{...},options:{...},{url:'api2',data:{...},options:{...}]} component={RenderComponent}/>,root);
+React.render(
+  <FetchAll 
+      fetchers={[{url:'api1',data:{...},options:{...},{url:'api2',data:{...},options:{...}]} 
+      component={RenderComponent}/>
+  ,root);
 
 const FetchAllRenderComponent = withFetchAll(RenderComponent);
 
-React.render(<FetchAllRenderComponent fetchers={[{url:'api1',data:{...},options:{...},{url:'api2',data:{...},options:{...}]} component={RenderComponent}/>,root);
+React.render(
+  <FetchAllRenderComponent 
+      fetchers={[{url:'api1',data:{...},options:{...},{url:'api2',data:{...},options:{...}]} 
+      component={RenderComponent}/>
+  ,root);
 
 const CreateFetch = createWithFetch({url:'/api',data:{...}})(RenderComponent);
 
