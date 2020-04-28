@@ -4,6 +4,7 @@ export const globalParams = {
   ajax: axios.create(),
   loading: null,
   error: null,
+  empty:null,
   transformResponse: (response) => {
     const { data } = response;
     response.data = {

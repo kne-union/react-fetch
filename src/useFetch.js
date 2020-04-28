@@ -1,38 +1,19 @@
-import {useCallback, useEffect, useImperativeHandle} from 'react';
-import useState from './useSafeState';
+import {useCallback} from 'react';
+import useFetchCreate from './useFetchCreate';
 import {globalParams} from './preset';
 
-export default ({url, data, options}, ref) => {
-    const [isLoading, setIsLoading] = useState(true);
-    const [results, setResults] = useState({});
-    const [errorMsg, setErrorMsg] = useState();
-    const send = useCallback(() => {
-        setIsLoading(true);
+export default ({auto = true, url, data, options}, ref) => {
+    const fetcher = useCallback(() => {
         return globalParams.ajax({
             ...options,
             url,
             data
         }).then((response) => {
-            const {data} = globalParams.transformResponse(response);
-            if (data.code === 200) {
-                setResults(data.results);
-            } else {
-                setErrorMsg(data.msg || '请求错误');
-            }
-        }).finally(() => {
-            setIsLoading(false);
-        });
+            return globalParams.transformResponse(response);
+        })
     }, [url, data, options]);
-
-    useImperativeHandle(ref, () => {
-        return {
-            refresh: () => send()
-        };
-    }, [send]);
-
-    useEffect(() => {
-        send();
-    }, [send]);
-
-    return {isLoading, errorMsg, results, send};
+    return useFetchCreate({
+        fetcher,
+        auto
+    }, ref);
 };
