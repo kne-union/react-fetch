@@ -79,7 +79,19 @@ fetchReset({
 
 # API
 
+Fetch
 
+|属性名|说明|类型|默认值|
+|  ---  | ---  | --- | --- |
+|url|需要请求接口的url|string|- |
+|data|POST请求的data|obj| - |
+|options|请求的其他参数，如method,headers等，详细请参考[axios](https://github.com/axios/axios)| - |
+|loading|在请求发出后没有返回结果时渲染的组件|jsx|null|
+|error|请求返回后code不为200时渲染的组件，如果传入函数，参数中会接收到请求返回的错误msg|jsx&#124;func|null|
+|empty|请求未发出时渲染的组件|jsx|null|
+|auto|是否自动发送请求，如果为false需要手动调用refresh方法才会发送请求，并且url,data,options发生变化后不会自动发送新的请求|bool|true|
+|component|请求返回成功时需要渲染的组件|React Component|-|
+|render|请求返回成功时执行的方法，改方法需要返回jsx，参数可以拿到{data,refresh}，当存在component时改方法不会被执行|func|-|
 
 ### change log:
 
