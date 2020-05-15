@@ -10,7 +10,8 @@ export const globalParams = {
     response.data = {
       code: data.code,
       msg: data.msg,
-      results: data.results
+      results: data.results,
+      ...data
     };
     return response;
   }
