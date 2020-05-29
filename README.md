@@ -118,7 +118,7 @@ fetchReset({
 |empty|请求未发出时渲染的组件|jsx|null|
 |auto|是否自动发送请求，如果为false需要手动调用refresh方法才会发送请求，并且url,data,options发生变化后不会自动发送新的请求|bool|true|
 |component|请求返回成功时需要渲染的组件|React Component|-|
-|render|请求返回成功时执行的方法，改方法需要返回jsx，参数可以拿到{data,refresh}，当存在component时改方法不会被执行|func|-|
+|render|请求返回成功时执行的方法，改方法需要返回jsx，参数可以拿到{data,refresh,setData}，当存在component时改方法不会被执行|func|-|
 
 #### FetchAll
 
@@ -130,7 +130,7 @@ fetchReset({
 |empty|请求未发出时渲染的组件|jsx|null|
 |auto|是否自动发送请求，如果为false需要手动调用refresh方法才会发送请求，并且url,data,options发生变化后不会自动发送新的请求|bool|true|
 |component|请求返回成功时需要渲染的组件|React Component|-|
-|render|请求返回成功时执行的方法，改方法需要返回jsx，参数可以拿到{data,refresh}，当存在component时改方法不会被执行|func|-|
+|render|请求返回成功时执行的方法，改方法需要返回jsx，参数可以拿到{data,refresh,setData}，当存在component时改方法不会被执行|func|-|
 
 #### withFetch 
 
@@ -163,7 +163,7 @@ options:
 |options|请求的其他参数，如method,headers等，详细请参考[axios](https://github.com/axios/axios)｜obj| - |
 |auto|是否自动发送请求，如果为false需要手动调用refresh方法才会发送请求，并且url,data,options发生变化后不会自动发送新的请求|bool|true|
 
-返回值 {isLoading, isComplete, errorMsg, results, refresh}
+返回值 {isLoading, isComplete, errorMsg, results, refresh,setData}
 
 |属性名|说明|类型|
 | --- | --- | --- |
@@ -172,6 +172,7 @@ options:
 |errorMsg|当前组件的请求错误信息|bool|
 |results|当前组件的请求返回数据|-|
 |refresh|可以调用它手动重新发送请求的方法|func|
+|setData|可以调用它给fetch中保存值的state赋值|func|
 
 #### useFetchAll 
 
@@ -186,7 +187,7 @@ options:
 |fetchers|需要请求的请求数组，数组中的每一项包含url,data,options,参考Fetch的url,data,options参数|array| - |
 |auto|是否自动发送请求，如果为false需要手动调用refresh方法才会发送请求，并且url,data,options发生变化后不会自动发送新的请求|bool|true|
 
-返回值 {isLoading, isComplete, errorMsg, results, refresh}
+返回值 {isLoading, isComplete, errorMsg, results, refresh,setData}
 
 |属性名|说明|类型|
 | --- | --- | --- |
@@ -195,6 +196,7 @@ options:
 |errorMsg|当前组件的请求错误信息|bool|
 |results|当前组件的请求返回数据|-|
 |refresh|可以调用它手动重新发送请求的方法|func|
+|setData|可以调用它给fetch中保存值的state赋值|func|
 
 #### preset 预制设置的方法 preset(options)
 
@@ -211,3 +213,4 @@ options
 ### change log:
 
 2020.04.28 v0.1.6 添加了fetchAll等系列API以支持多接口并发请求
+2020.05.25 v0.1.9 添加了setData，用于给state赋值

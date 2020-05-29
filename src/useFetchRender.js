@@ -1,7 +1,7 @@
 import React from 'react';
 import isFunction from "lodash/isFunction";
 
-export default ({loading, empty, error, component, render, isLoading, isComplete, errorMsg, results, refresh, props}) => {
+export default ({loading, empty, error, component, render, isLoading, isComplete, errorMsg, results, refresh, setData, props}) => {
     if (isLoading) {
         return loading;
     }
@@ -20,11 +20,11 @@ export default ({loading, empty, error, component, render, isLoading, isComplete
 
     if (component) {
         const FetchComponent = component;
-        return <FetchComponent {...props} data={results} refresh={refresh}/>;
+        return <FetchComponent {...props} data={results} refresh={refresh} setData={setData}/>;
     }
 
     if (render) {
-        return render({...props, data: results, refresh});
+        return render({...props, data: results, refresh, setData});
     }
 
     throw new Error('请传入component参数或者render参数');
