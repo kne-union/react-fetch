@@ -1,10 +1,10 @@
 import {useCallback} from 'react';
 import useFetchCreate from './useFetchCreate';
-import {globalParams} from './preset';
+import {globalParams, instance} from './preset';
 
 export default ({auto = true, url, data, options}, ref) => {
     const fetcher = useCallback(() => {
-        return globalParams.ajax({
+        return instance({
             ...options,
             url,
             data
