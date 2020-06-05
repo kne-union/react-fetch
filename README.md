@@ -65,6 +65,16 @@ const CreateFetchAll = createWithFetchAll({
 })(RenderComponent);
 
 React.render(<CreateFetchAll/>,root);
+
+// 缓存的使用
+<Fetch url="/api" options={{ method: 'POST', cache: { storage: true, expire: 120000, storage_expire: 60000, max_cache_size: 20} }} component={RenderComponent} />
+<Fetch url="/api" options={{ method: 'POST', cache: true }} component={RenderComponent} />
+<FetchAll
+  fetchers={[
+    { url: '/api1', options:{ method: 'POST', cache: true } },
+    { url: '/api2', options:{ method: 'POST', cache: true } }
+  ]}
+  component={RenderComponent} />
 ```
 # preset使用示例
 ```jsx
@@ -207,6 +217,17 @@ options
 |error|请求返回后code不为200时渲染的组件，如果传入函数，参数中会接收到请求返回的错误msg|jsx&#124;func|null|
 |empty|请求未发出时渲染的组件|jsx|null|
 |transformResponse|请求转换器，参数为response返回值为response需要在此方法将请求返回结果转换成规定的格式|func|-|
+
+#### 缓存接口的应用
+
+Fetch options
+
+|属性名|说明|类型|默认值|
+|  ---  | ---  | --- | --- |
+|cache|cache如果为bool类型，例如：cache: true则启用内存内存缓存；如果cache为对象类型，例如cache:{expire: 1000 * 60 * 5, // 过期时间  默认5分钟; 0:表示不过期 
+            storage: false, // 是否开启本地缓存
+            storage_expire: 1000 * 60 * 5, // 本地缓存过期时间  默认一小时; 0:表示不过期
+            max_cache_size: 15}|bool,object|-|
 
 ### change log:
 
