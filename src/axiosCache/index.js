@@ -15,18 +15,20 @@ export default function withAxios(instance, option) {
             let responsePromise = null;
             if (cacher.hasCache(cacheKey)) {
                 responsePromise = cacher.getCache(cacheKey).value;
+                let tempOptions = JSON.stringify(cacher.options)
                 return responsePromise.then(response => {
-                    responseJob(response, cacher, cacheKey);
+                    responseJob(response, cacher, JSON.parse(tempOptions), cacheKey);
                     return JSON.parse(JSON.stringify(response))
                 });
             } else if (cacher.getStorage(cacheKey)) {
                 let resultResponse = cacher.getStorage(cacheKey).value;
                 return Promise.resolve(resultResponse).then(data => JSON.parse(JSON.stringify(data)));
             } else {
+                let tempOptions = JSON.stringify(cacher.options)
                 responsePromise = (async () => {
                     try {
                         const response = await instance(...arg);
-                        responseJob(response, cacher, cacheKey);
+                        responseJob(response, cacher, JSON.parse(tempOptions), cacheKey);
                         return Promise.resolve(response);
                     } catch (reason) {
                         cacher.removeCache(cacheKey)
@@ -56,7 +58,7 @@ export default function withAxios(instance, option) {
         }
     }
     // 处理返回结果
-    function responseJob(response, cacher, cacheKey) {
+    function responseJob(response, cacher, options, cacheKey) {
         const result = option.transformResponse(response);
         // 将正确的结果放入缓存中; 如果返回的结果不正确，则不进行缓存，并且清除内存中的Promise缓存
         if (result.data.code !== 200) {
@@ -64,7 +66,7 @@ export default function withAxios(instance, option) {
             cacher.removeStorageByKey(cacheKey)
         } else {
             // 如果启用本地缓存则将返回结果放入本地缓存中
-            if (cacher.options.storage && cacher.options.storage === true) {
+            if (options.storage && options.storage === true) {
                 cacher.setStorage(cacheKey, response)
             }
         }

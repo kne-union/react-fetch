@@ -1,20 +1,21 @@
 import get from 'lodash/get';
+import hash from 'object-hash';
+const defaults = {
+    expire: 1000 * 60 * 5, // 过期时间  默认5分钟; 0:表示不过期
+    storage: false, // 是否开启本地缓存
+    storage_expire: 1000 * 60 * 5, // 本地缓存过期时间  默认一小时; 0:表示不过期
+    max_cache_size: 15, // 指定最多可缓存的条目数，超过这个数量时最早的缓存会被删除，默认为 15
+};
 export default class Cache {
     constructor(options) {
         this.cacheMap = new Map();
-        let defaults = {
-            expire: 1000 * 60 * 5, // 过期时间  默认5分钟; 0:表示不过期
-            storage: false, // 是否开启本地缓存
-            storage_expire: 1000 * 60 * 5, // 本地缓存过期时间  默认一小时; 0:表示不过期
-            max_cache_size: 15, // 指定最多可缓存的条目数，超过这个数量时最早的缓存会被删除，默认为 15
-        };
         validateOptions(options);
-        this.options = Object.assign(defaults, options);
+        this.options = Object.assign({}, defaults, options);
     }
     // 设置缓存的值
     setOptions(options) {
         validateOptions(options);
-        Object.assign(this.options, options);
+        this.options = Object.assign({}, defaults, options);
     }
     // 清除本地缓存
     removeStorage() {
@@ -109,19 +110,23 @@ export default class Cache {
     // 生成唯一的key
     buildUniqueKey(config) {
         const { url, params, method, data } = config;
-        let keyUrl = url;
-        const paramStr = (obj) => {
-            if (Object.prototype.toString.call(obj) === '[object Object]') {
-                return JSON.stringify(Object.keys(obj).sort().reduce((result, key) => {
-                    result[key] = obj[key]
-                    return result
-                }, {}))
-            } else {
-                return JSON.stringify(obj)
-            }
-        }
-        keyUrl += `?${paramStr(params || {})}&${paramStr(data || {})}&${method}`;
-        return keyUrl
+        const configHash = hash({
+            url, params, method, data
+        })
+        return configHash;
+        // let keyUrl = url;
+        // const paramStr = (obj) => {
+        //     if (Object.prototype.toString.call(obj) === '[object Object]') {
+        //         return hash(Object.keys(obj).sort().reduce((result, key) => {
+        //             result[key] = obj[key]
+        //             return result
+        //         }, {}))
+        //     } else {
+        //         return hash(obj)
+        //     }
+        // }
+        // keyUrl += `?${paramStr(params || {})}&${paramStr(data || {})}&${method}`;
+        // return keyUrl
     }
 }
 // 设置过期时间
