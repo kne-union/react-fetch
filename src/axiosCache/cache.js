@@ -110,23 +110,9 @@ export default class Cache {
     // 生成唯一的key
     buildUniqueKey(config) {
         const { url, params, method, data } = config;
-        const configHash = hash({
+        return hash({
             url, params, method, data
-        })
-        return configHash;
-        // let keyUrl = url;
-        // const paramStr = (obj) => {
-        //     if (Object.prototype.toString.call(obj) === '[object Object]') {
-        //         return hash(Object.keys(obj).sort().reduce((result, key) => {
-        //             result[key] = obj[key]
-        //             return result
-        //         }, {}))
-        //     } else {
-        //         return hash(obj)
-        //     }
-        // }
-        // keyUrl += `?${paramStr(params || {})}&${paramStr(data || {})}&${method}`;
-        // return keyUrl
+        });
     }
 }
 // 设置过期时间

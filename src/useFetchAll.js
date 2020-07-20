@@ -13,12 +13,10 @@ export default ({ auto = true, fetchers }, ref) => {
                     data: resultsMerge(dataList)
                 };
             } else {
-                const errorDataList = dataList.filter(function (data) {
-                    return data.code !== 200
-                })
+                const resData = dataList.find(({data})=>data.code!==200);
                 return {
-                    data: resultsMerge(errorDataList)
-                }
+                    data:resData
+                };
             }
         });
     }, [fetchers]);
