@@ -44,6 +44,10 @@ export default [
                 format: 'umd',
                 sourcemap: true,
                 plugins: [terser()]
+            },{
+                file: 'dist/react-fetch.system.js',
+                format: 'system',
+                sourcemap: true
             }
         ],
         plugins: [
