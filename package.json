@@ -1,6 +1,6 @@
 {
   "name": "@kne/react-fetch",
-  "version": "0.1.12",
+  "version": "0.1.14",
   "description": "用于表单验证的react组件",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
@@ -31,9 +31,9 @@
   },
   "homepage": "https://github.com/kne-union/react-fetch#readme",
   "peerDependencies": {
-    "prop-types": "15.x",
-    "react": "16.x",
-    "react-dom": "16.x",
+    "prop-types": ">=15.x",
+    "react": ">=16.x",
+    "react-dom": ">=16.x",
     "axios": "^0.19.2"
   },
   "dependencies": {
