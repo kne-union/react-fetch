@@ -10,7 +10,7 @@ const withFetch = (WrappedComponent) => {
 export default withFetch;
 
 export const createWithFetch = (params) => (WrappedComponent) => {
-    const pickParams = pick(params, ['url', 'params', 'data', 'options', 'loading', 'error', 'auto']);
+    const pickParams = pick(params, ['url', 'params', 'method', 'data', 'options', 'loading', 'error', 'auto']);
     const FetchComponent = withFetch(WrappedComponent);
     return forwardRef((props, ref) => <FetchComponent {...merge({}, pickParams, props)} ref={ref}/>);
 };
