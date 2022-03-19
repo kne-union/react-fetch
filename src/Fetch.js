@@ -9,6 +9,7 @@ export default forwardRef(({
                                data,
                                params,
                                method,
+                               loader,
                                loading = globalParams.loading,
                                empty = globalParams.empty,
                                error = globalParams.error,
@@ -17,6 +18,6 @@ export default forwardRef(({
                                options,
                                ...props
                            }, ref) => {
-    const fetcher = useFetch({url, auto, params, method, data, options}, ref);
+    const fetcher = useFetch({url, auto, params, method, data, loader, options}, ref);
     return useFetchRender({loading, error, empty, component, render, props, ...fetcher});
 });
