@@ -2,6 +2,7 @@ import {useRef, useEffect, useState} from 'react';
 import {globalParams} from './preset';
 import isEqual from 'lodash/isEqual';
 import objectHash from "object-hash";
+import merge from 'lodash/merge';
 
 class Request {
     constructor(options) {
@@ -49,6 +50,7 @@ const useFetch = (fetcherOptions) => {
     const [isComplete, setIsComplete] = useState(false);
     const [fetchData, setFetchData] = useState(null);
     const [error, setError] = useState(null);
+    const [requestParams, setRequestParams] = useState({});
 
     const fetcherOptionsRef = useRef({
         url, params, method, data, options, isLocal
@@ -60,8 +62,9 @@ const useFetch = (fetcherOptions) => {
 
     const send = (sendProps, force) => {
         const {options, ...props} = fetcherOptionsRef.current;
-        const mergeData = Object.assign({}, options, props, sendProps);
+        const mergeData = merge({}, options, props, sendProps);
         setIsComplete(false);
+        setRequestParams(mergeData);
         return (() => {
             if (typeof apiRef.current.loader === 'function') {
                 return Promise.resolve(apiRef.current.loader(mergeData)).then((data) => ({
@@ -72,17 +75,21 @@ const useFetch = (fetcherOptions) => {
                 }));
             } else {
                 return requestRef.current.send(mergeData, force).then((response) => {
-                    return globalParams.transformResponse(response);
+                    return globalParams.transformResponse(Object.assign({}, response));
                 }, (e) => {
+                    e.message = e.message || '请求发生错误';
                     console.error(e);
-                    setError(e.message || '请求发生错误');
+                    setError(e);
                 });
             }
         })().then(({data}) => {
             if (data.code !== 200) {
                 const errMsg = data.msg || '请求发生错误';
-                setError(errMsg);
-                throw new Error(errMsg);
+                const error = new Error(errMsg);
+                error.code = data.code;
+                error.data = data;
+                setError(error);
+                throw error;
             }
             return data.results;
         }).finally(() => {
@@ -90,22 +97,22 @@ const useFetch = (fetcherOptions) => {
         });
     };
 
-    const refresh = () => {
+    const refresh = (sendProps, force = true) => {
         setIsLoading(true);
-        return send({}, true).then((data) => {
+        return send(sendProps, force).then((data) => {
             setFetchData(data);
             return data;
         }).finally(() => {
             setIsLoading(false);
         });
     };
-    const reload = () => {
-        return send({}, true).then((data) => {
+    const reload = (sendProps, force = true) => {
+        return send(sendProps, force).then((data) => {
             setFetchData(data);
         });
     };
-    const loadMore = (sendProps, callback) => {
-        return send(sendProps).then((data) => {
+    const loadMore = (sendProps, callback, force = true) => {
+        return send(sendProps, force).then((data) => {
             setFetchData((old) => {
                 return callback(old, data);
             });
@@ -117,13 +124,14 @@ const useFetch = (fetcherOptions) => {
         send, refresh, reload, loadMore, auto, loader, setData: setFetchData
     };
 
+    const requestToken = JSON.stringify({url, params, method, data, options});
     useEffect(() => {
-        apiRef.current.auto && apiRef.current.refresh();
-    }, [url, params, method, data, options]);
+        apiRef.current.auto && apiRef.current.refresh({}, false);
+    }, [requestToken]);
 
     return {
         isLoading, isComplete, data: fetchData, error,
-        send, refresh, reload, loadMore, setData: setFetchData
+        send, refresh, reload, loadMore, setData: setFetchData, requestParams
     };
 };
 

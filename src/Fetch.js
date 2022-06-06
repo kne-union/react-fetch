@@ -4,8 +4,19 @@ import pick from 'lodash/pick';
 import useFetch from './useFetch';
 import {globalParams} from './preset';
 
-const Fetch = forwardRef(({component, render, loading, empty, error: errorComponent, ...props}, ref) => {
-    const {isLoading, isComplete, data, error, send, refresh, reload, loadMore, setData} = useFetch(props);
+const Fetch = forwardRef(({component, render, loading, isEmpty, empty, error: errorComponent, ...props}, ref) => {
+    const {
+        isLoading,
+        isComplete,
+        data,
+        requestParams,
+        error,
+        send,
+        refresh,
+        reload,
+        loadMore,
+        setData
+    } = useFetch(props);
     const fetchPropsList = ['url', 'params', 'method', 'data', 'cache', 'ttl', 'isLocal', 'auto', 'loader', 'options'];
     const otherProps = omit(props, fetchPropsList);
     const fetchProps = pick(props, fetchPropsList);
@@ -24,9 +35,12 @@ const Fetch = forwardRef(({component, render, loading, empty, error: errorCompon
         }
         return _error;
     }
+    if (isComplete && (typeof isEmpty === 'function' ? isEmpty(data, requestParams) : !data)) {
+        return empty || globalParams.empty;
+    }
 
     if (!data) {
-        return empty || globalParams.empty;
+        return null;
     }
 
     if (component) {
@@ -34,11 +48,22 @@ const Fetch = forwardRef(({component, render, loading, empty, error: errorCompon
         return <FetchComponent {...otherProps} fetchProps={fetchProps} isComplete={isComplete} data={data}
                                refresh={refresh}
                                reload={reload}
-                               setData={setData} loadMore={loadMore} send={send}/>;
+                               setData={setData} loadMore={loadMore} send={send} requestParams={requestParams}/>;
     }
 
     if (render) {
-        return render({...otherProps, fetchProps, isComplete, data, refresh, reload, setData, loadMore, send});
+        return render({
+            ...otherProps,
+            fetchProps,
+            isComplete,
+            data,
+            refresh,
+            reload,
+            setData,
+            loadMore,
+            send,
+            requestParams
+        });
     }
 
     throw new Error('请传入component参数或者render参数');
