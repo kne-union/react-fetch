@@ -62,8 +62,6 @@ const LoadingRemote = createWithFetch({
 });
 
 const CacheRemote = createWithFetch({
-    cache: 'cache',
-    isLocal: true,
     url: '/react-fetch/mock/data.json'
 })(({data}) => {
     return data.list.map((item, index) => <div key={index}>{item.name}</div>);
@@ -80,6 +78,7 @@ const App = () => {
         </button>
         <LoadingRemote/>
         <CacheRemote/>
+        <CacheRemote />
     </>;
 };
 

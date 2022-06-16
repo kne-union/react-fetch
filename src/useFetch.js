@@ -25,11 +25,19 @@ const useFetch = (fetcherOptions) => {
         isLoading, isComplete, fetchData, error, requestParams
     };
 
+    const requestToken = objectHash(pick(props, ['url', 'params', 'method', 'data', 'options']), {
+        algorithm: 'md5',
+        encoding: 'base64'
+    });
+    const requestTokenRef = useRef(requestToken);
+    requestTokenRef.current = requestToken;
+
     const pluginRunnerRef = useRef();
 
     useEffect(() => {
         pluginRunnerRef.current = createRunner({
             getProps: () => propsRef.current,
+            getRequestToken: () => requestTokenRef.current,
             setRequestParams,
             setFetchData,
             setError,
@@ -55,10 +63,6 @@ const useFetch = (fetcherOptions) => {
     apiRef.current = {
         send, refresh, reload, loadMore, setData: setFetchData
     };
-    const requestToken = objectHash(pick(props, ['url', 'params', 'method', 'data', 'options']), {
-        algorithm: 'md5',
-        encoding: 'base64'
-    });
     useEffect(() => {
         if (propsRef.current.auto) {
             if (stateRef.current.isComplete) {

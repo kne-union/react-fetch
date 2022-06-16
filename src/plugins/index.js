@@ -1,6 +1,5 @@
 import start from './start';
 import loader from './loader';
-import pagination from './pagination';
 import params from './params';
 import cache from './cache';
 import request from './request';
@@ -11,7 +10,7 @@ import loadMore from './load-more';
 import complete from './complete';
 import error from './error';
 
-export const plugins = [start, params, loader, pagination, cache, request, cacheRecord, transformResponse, outputData, loadMore, complete, error];
+export const plugins = [start, params, loader, cache, request, cacheRecord, transformResponse, outputData, loadMore, complete, error];
 
 const globalContext = {};
 

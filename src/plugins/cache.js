@@ -5,16 +5,12 @@ export default {
     id: 'cache',
     plugin: ({force}, context) => {
         const {cache} = context.componentContext.getProps();
+        const token = context.componentContext.getRequestToken();
         if (force === true || !cache) {
             return;
         }
-        const params = context.outputStack['params'];
-        const cacheKey = (cache === true ? '' : cache) + objectHash(params, {
-            algorithm: 'md5',
-            encoding: 'base64'
-        });
-        context.requestContext.cacheKey = cacheKey;
 
+        const cacheKey = (cache === true ? '' : cache) + token;
         const cacheData = globalParams.cache.get(cacheKey);
         if (!cacheData) {
             return;

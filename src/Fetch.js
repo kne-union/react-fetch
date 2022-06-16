@@ -26,17 +26,17 @@ const Fetch = forwardRef(({component, render, loading, isEmpty, empty, error: er
         };
     });
     if (isLoading) {
-        return loading || globalParams.loading;
+        return loading === void (0) ? globalParams.loading : loading;
     }
     if (error) {
-        const _error = errorComponent || globalParams.error;
+        const _error = errorComponent === void (0) ? globalParams.error : errorComponent;
         if (typeof _error === 'function') {
             return _error(error);
         }
         return _error;
     }
     if (isComplete && (typeof isEmpty === 'function' ? isEmpty(data, requestParams) : !data)) {
-        return empty || globalParams.empty;
+        return empty === void (0) ? globalParams.empty : empty;
     }
 
     if (!data) {
