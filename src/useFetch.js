@@ -1,50 +1,16 @@
 import {useRef, useEffect, useState} from 'react';
-import {globalParams} from './preset';
-import isEqual from 'lodash/isEqual';
 import objectHash from "object-hash";
-import merge from 'lodash/merge';
-
-class Request {
-    constructor(options) {
-        const {cache, ttl} = Object.assign({}, options);
-        this.cahce = cache;
-        this.ttl = ttl;
-        this.options = null;
-        this.data = null;
-    }
-
-    _sendWithCache(options, callback) {
-        const {isLocal, ...requestOptions} = options;
-        if (!this.cahce) {
-            return callback(requestOptions);
-        }
-        const cacheKey = (this.cahce === true ? '' : this.cahce) + objectHash(requestOptions, {
-            algorithm: 'md5',
-            encoding: 'base64'
-        });
-        let cacheData = globalParams.cache.get(cacheKey);
-        if (!cacheData) {
-            cacheData = callback(requestOptions);
-            globalParams.cache.put(cacheKey, cacheData, {ttl: this.ttl, isLocal});
-        }
-        return Promise.resolve(cacheData);
-    }
-
-    send(options, force) {
-        if (force || !isEqual(options, this.options)) {
-            this.data = this._sendWithCache(options, (options) => globalParams.ajax(options));
-        }
-        this.options = options;
-        return this.data;
-    }
-}
+import {createRunner} from './plugins';
+import pick from 'lodash/pick';
 
 const useFetch = (fetcherOptions) => {
-    const {url, params, method, data, cache, ttl, auto, loader, isLocal, options} = Object.assign({
-        auto: true
+    const props = Object.assign({
+        auto: true,
+        updateType: 'reload'
     }, fetcherOptions);
 
-    const requestRef = useRef(new Request({cache, ttl}));
+    const propsRef = useRef(props);
+    propsRef.current = props;
 
     const [isLoading, setIsLoading] = useState(false);
     const [isComplete, setIsComplete] = useState(false);
@@ -52,81 +18,55 @@ const useFetch = (fetcherOptions) => {
     const [error, setError] = useState(null);
     const [requestParams, setRequestParams] = useState({});
 
-    const fetcherOptionsRef = useRef({
-        url, params, method, data, options, isLocal
+    const stateRef = useRef({
+        isLoading, isComplete, fetchData, error, requestParams
     });
-
-    fetcherOptionsRef.current = {
-        url, params, method, data, options, isLocal
+    stateRef.current = {
+        isLoading, isComplete, fetchData, error, requestParams
     };
 
-    const send = (sendProps, force) => {
-        const {options, ...props} = fetcherOptionsRef.current;
-        const mergeData = merge({}, options, props, sendProps);
-        setIsComplete(false);
-        setRequestParams(mergeData);
-        return (() => {
-            if (typeof apiRef.current.loader === 'function') {
-                return Promise.resolve(apiRef.current.loader(mergeData)).then((data) => ({
-                    data: {
-                        code: 200,
-                        results: data
-                    }
-                }));
-            } else {
-                return requestRef.current.send(mergeData, force).then((response) => {
-                    return globalParams.transformResponse(Object.assign({}, response));
-                }, (e) => {
-                    e.message = e.message || '请求发生错误';
-                    console.error(e);
-                    setError(e);
-                });
-            }
-        })().then(({data}) => {
-            if (data.code !== 200) {
-                const errMsg = data.msg || '请求发生错误';
-                const error = new Error(errMsg);
-                error.code = data.code;
-                error.data = data;
-                setError(error);
-                throw error;
-            }
-            return data.results;
-        }).finally(() => {
-            setIsComplete(true);
+    const pluginRunnerRef = useRef();
+
+    useEffect(() => {
+        pluginRunnerRef.current = createRunner({
+            getProps: () => propsRef.current,
+            setRequestParams,
+            setFetchData,
+            setError,
+            setIsComplete,
+            setIsLoading
         });
-    };
+    }, []);
 
+    const send = (sendProps, force = true) => {
+        return pluginRunnerRef.current(Object.assign({}, sendProps, {force}));
+    };
     const refresh = (sendProps, force = true) => {
-        setIsLoading(true);
-        return send(sendProps, force).then((data) => {
-            setFetchData(data);
-            return data;
-        }).finally(() => {
-            setIsLoading(false);
-        });
+        return pluginRunnerRef.current(Object.assign({}, sendProps, {force, type: 'refresh'}));
     };
     const reload = (sendProps, force = true) => {
-        return send(sendProps, force).then((data) => {
-            setFetchData(data);
-        });
+        return pluginRunnerRef.current(Object.assign({}, sendProps, {force, type: 'reload'}));
     };
     const loadMore = (sendProps, callback, force = true) => {
-        return send(sendProps, force).then((data) => {
-            setFetchData((old) => {
-                return callback(old, data);
-            });
-        });
+        return pluginRunnerRef.current(Object.assign({}, sendProps, {force, callback, type: 'load-more'}));
     };
 
     const apiRef = useRef({});
     apiRef.current = {
-        send, refresh, reload, loadMore, auto, loader, setData: setFetchData
+        send, refresh, reload, loadMore, setData: setFetchData
     };
-
-    const requestToken = JSON.stringify({url, params, method, data, options});
+    const requestToken = objectHash(pick(props, ['url', 'params', 'method', 'data', 'options']), {
+        algorithm: 'md5',
+        encoding: 'base64'
+    });
     useEffect(() => {
-        apiRef.current.auto && apiRef.current.refresh({}, false);
+        if (propsRef.current.auto) {
+            if (stateRef.current.isComplete) {
+                apiRef.current.send({type: propsRef.current.updateType}, false);
+            } else {
+                apiRef.current.refresh({}, false);
+            }
+        }
     }, [requestToken]);
 
     return {

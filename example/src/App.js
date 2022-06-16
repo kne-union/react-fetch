@@ -15,18 +15,14 @@ preset({
 
 const Remote = createWithFetch({
     url: '/react-fetch/mock/data.json',
-    params: {
-        page: 1,
-        size: 10
-    }
-})(({data, reload, refresh, loadMore, requestParams}) => {
-    console.log(requestParams);
-    const [page, setPage] = useState(1);
+    updateType: 'nextPage'
+})(({data, send, reload, refresh, loadMore, requestParams}) => {
+    console.log(data, requestParams);
     return <div>
         组件
         <button onClick={() => {
             refresh({
-                params:{state:123}
+                params: {state: 123}
             });
         }}>刷新</button>
         <button onClick={() => {
@@ -35,20 +31,56 @@ const Remote = createWithFetch({
         </button>
         {data.list.map((item, index) => <div key={index}>{item.name}</div>)}
         <button onClick={() => {
-            const currentPage = page + 1;
-            setPage(currentPage);
-            loadMore({}, (data, newData) => {
+            loadMore({params: {page: requestParams.params.page + 1}}, (data, newData) => {
                 return Object.assign({}, newData, {
                     list: data.list.concat(newData.list)
                 });
             });
-        }}>加载更多{page}
+        }}>加载更多{requestParams.params.page}
+        </button>
+        <button onClick={() => {
+            refresh({page: 1, size: 10});
+        }}>
+            页面1
+        </button>
+        <button onClick={() => {
+            refresh({page: 2, size: 10});
+        }}>
+            页面2
         </button>
     </div>;
 });
 
+const LoadingRemote = createWithFetch({
+    loader: () => {
+        return {
+            data: '哈哈哈哈'
+        }
+    }
+})(({data}) => {
+    return <div>{data.data}</div>
+});
+
+const CacheRemote = createWithFetch({
+    cache: 'cache',
+    isLocal: true,
+    url: '/react-fetch/mock/data.json'
+})(({data}) => {
+    return data.list.map((item, index) => <div key={index}>{item.name}</div>);
+});
+
 const App = () => {
-    return <Remote/>;
+    const [sum, setSum] = useState(1);
+    return <>
+        <Remote params={{sum}}/>
+        <button onClick={() => {
+            setSum((sum) => sum + 1);
+        }}>
+            修改
+        </button>
+        <LoadingRemote/>
+        <CacheRemote/>
+    </>;
 };
 
 export default App;
