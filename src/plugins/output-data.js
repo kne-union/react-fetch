@@ -3,7 +3,9 @@ export default {
     plugin: (props, context) => {
         const responseData = context.output.data;
         if (responseData.code !== 200) {
-            throw new Error(responseData.msg);
+            const error = new Error(responseData.msg);
+            error.responseData = responseData;
+            throw error;
         }
         return responseData.results;
     },

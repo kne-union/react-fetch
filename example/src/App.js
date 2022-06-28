@@ -67,6 +67,16 @@ const CacheRemote = createWithFetch({
     return data.list.map((item, index) => <div key={index}>{item.name}</div>);
 });
 
+const LoadError = createWithFetch({
+    url: '/react-fetch/mock/error.json',
+    error: (msg) => msg,
+    onError: (e) => {
+        console.log(e[0].responseData);
+    }
+})(({data}) => {
+    return 'xxxxx';
+});
+
 const App = () => {
     const [sum, setSum] = useState(1);
     return <>
@@ -78,7 +88,8 @@ const App = () => {
         </button>
         <LoadingRemote/>
         <CacheRemote/>
-        <CacheRemote />
+        <CacheRemote/>
+        <LoadError/>
     </>;
 };
 
