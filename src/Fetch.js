@@ -35,12 +35,13 @@ const Fetch = forwardRef(({component, render, loading, isEmpty, empty, error: er
         }
         return _error;
     }
-    if (isComplete && (typeof isEmpty === 'function' ? isEmpty(data, requestParams) : !data)) {
-        return empty === void (0) ? globalParams.empty : empty;
+
+    if (!isComplete) {
+        return null;
     }
 
-    if (!data) {
-        return null;
+    if (typeof isEmpty === 'function' ? isEmpty(data, requestParams) : !data) {
+        return empty === void (0) ? globalParams.empty : empty;
     }
 
     if (component) {

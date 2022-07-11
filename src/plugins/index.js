@@ -37,7 +37,7 @@ export const createRunner = (componentContext) => {
                 }
                 const output = await currentPlugin.plugin(props, pluginContext);
                 pluginContext.outputStack[currentPlugin.id] = output;
-                pluginContext.output = output || pluginContext.output;
+                pluginContext.output = output !== void (0) ? output : pluginContext.output;
                 pluginContext.runPath.push(currentPlugin.id);
             } catch (e) {
                 console.error(e);
