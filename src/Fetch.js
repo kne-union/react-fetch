@@ -36,7 +36,7 @@ const Fetch = forwardRef(({component, render, loading, isEmpty, empty, error: er
         return _error;
     }
 
-    if (!isComplete) {
+    if (!isComplete && !data) {
         return null;
     }
 

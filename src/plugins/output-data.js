@@ -7,7 +7,7 @@ export default {
             error.responseData = responseData;
             throw error;
         }
-        return responseData.results;
+        return responseData.results || {};
     },
     dependencies: ['request']
 };
