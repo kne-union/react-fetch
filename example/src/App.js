@@ -15,6 +15,7 @@ preset({
 
 const Remote = createWithFetch({
     url: '/react-fetch/mock/data.json',
+    params: {page: 1},
     updateType: 'nextPage'
 })(({data, send, reload, refresh, loadMore, requestParams}) => {
     console.log(data, requestParams);
@@ -80,7 +81,11 @@ const LoadError = createWithFetch({
 const App = () => {
     const [sum, setSum] = useState(1);
     return <>
-        <Remote params={{sum}}/>
+        <Remote params={{sum}} onSuccess={(data) => {
+            console.log('success', data);
+        }} onComplete={(context) => {
+            console.log(context);
+        }}/>
         <button onClick={() => {
             setSum((sum) => sum + 1);
         }}>

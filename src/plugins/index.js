@@ -10,7 +10,7 @@ import loadMore from './load-more';
 import complete from './complete';
 import error from './error';
 
-export const plugins = [start, params, loader, cache, request, cacheRecord, transformResponse, outputData, loadMore, complete, error];
+export const plugins = [start, params, loader, cache, request, transformResponse, outputData, cacheRecord, loadMore, complete, error];
 
 const globalContext = {};
 
