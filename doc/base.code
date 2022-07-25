@@ -1,0 +1,14 @@
+const {createWithFetch} = ReactFetch;
+const {default: List} = AntdList;
+
+const Remote = createWithFetch({
+    url: '/data1'
+})(({data}) => {
+    return <List bordered>
+        {data.map((item, index) => {
+            return <List.Item key={index}>{item.title}</List.Item>
+        })}
+    </List>;
+});
+
+render(<Remote/>);

@@ -1,101 +1,40 @@
-import {createWithFetch, preset} from '@kne/react-fetch';
-import {useState} from 'react';
-
-preset({
-    loading: 'loading....',
-    empty: '空',
-    transformResponse: (response) => {
-        const {data} = response;
-        response.data = {
-            code: data.code === 0 ? 200 : data.code, msg: data.msg, results: data.data
-        };
-        return response;
-    }
-});
-
-const Remote = createWithFetch({
-    url: '/react-fetch/mock/data.json',
-    params: {page: 1},
-    updateType: 'nextPage'
-})(({data, send, reload, refresh, loadMore, requestParams}) => {
-    console.log(data, requestParams);
-    return <div>
-        组件
-        <button onClick={() => {
-            refresh({
-                params: {state: 123}
-            });
-        }}>刷新</button>
-        <button onClick={() => {
-            reload();
-        }}>重载
-        </button>
-        {data.list.map((item, index) => <div key={index}>{item.name}</div>)}
-        <button onClick={() => {
-            loadMore({params: {page: requestParams.params.page + 1}}, (data, newData) => {
-                return Object.assign({}, newData, {
-                    list: data.list.concat(newData.list)
-                });
-            });
-        }}>加载更多{requestParams.params.page}
-        </button>
-        <button onClick={() => {
-            refresh({page: 1, size: 10});
-        }}>
-            页面1
-        </button>
-        <button onClick={() => {
-            refresh({page: 2, size: 10});
-        }}>
-            页面2
-        </button>
-    </div>;
-});
-
-const LoadingRemote = createWithFetch({
-    loader: () => {
-        return {
-            data: '哈哈哈哈'
-        }
-    }
-})(({data}) => {
-    return <div>{data.data}</div>
-});
-
-const CacheRemote = createWithFetch({
-    url: '/react-fetch/mock/data.json'
-})(({data}) => {
-    return data.list.map((item, index) => <div key={index}>{item.name}</div>);
-});
-
-const LoadError = createWithFetch({
-    url: '/react-fetch/mock/error.json',
-    error: (msg) => msg,
-    onError: (e) => {
-        console.log(e[0].responseData);
-    }
-})(({data}) => {
-    return 'xxxxx';
-});
+import {useEffect} from 'react';
+import ExampleDriver from '@kne/example-driver';
+import readme from './readme';
+import get from "lodash/get";
+import last from "lodash/last";
 
 const App = () => {
-    const [sum, setSum] = useState(1);
-    return <>
-        <Remote params={{sum}} onSuccess={(data) => {
-            console.log('success', data);
-        }} onComplete={(context) => {
-            console.log(context);
-        }}/>
-        <button onClick={() => {
-            setSum((sum) => sum + 1);
-        }}>
-            修改
-        </button>
-        <LoadingRemote/>
-        <CacheRemote/>
-        <CacheRemote/>
-        <LoadError/>
-    </>;
+    const exampleStyle = get(readme, 'example.style');
+    useEffect(() => {
+        if (!exampleStyle) {
+            return;
+        }
+        const dom = document.createElement('style');
+        dom.innerText = exampleStyle.replace(/\n/g, '');
+        document.head.append(dom);
+        return () => {
+            document.head.removeChild(dom);
+        };
+    }, [exampleStyle]);
+
+    return <div style={{padding:'20px'}}>
+        <h1>{last(readme.name.split('/'))}</h1>
+        <div>{readme.description}</div>
+        <h2>安装</h2>
+        <div>
+            <pre><code>npm install --save {readme.name}</code></pre>
+        </div>
+        <h2>概述</h2>
+        <div className="mark-down-html" dangerouslySetInnerHTML={{__html: readme.summary}}/>
+        <h2>代码示例</h2>
+        <div className={get(readme, 'example.className')}>
+            <ExampleDriver isFull={get(readme, 'example.isFull')}
+                           list={get(readme, 'example.list') || []}/>
+        </div>
+        <h2>API</h2>
+        <div className="mark-down-html" dangerouslySetInnerHTML={{__html: readme.api}}></div>
+    </div>
 };
 
 export default App;

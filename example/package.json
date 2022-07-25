@@ -1,20 +1,18 @@
 {
-  "name": "react-fetch-example",
-  "homepage": "/react-fetch",
+  "name": "example",
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ../node_modules/react-scripts/bin/react-scripts.js start",
-    "build": "node ../node_modules/react-scripts/bin/react-scripts.js build",
-    "test": "node ../node_modules/react-scripts/bin/react-scripts.js test",
-    "eject": "node ../node_modules/react-scripts/bin/react-scripts.js eject"
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test"
   },
   "dependencies": {
+    "@kne/example-driver": "^0.1.0",
     "@kne/react-fetch": "file:..",
-    "axios": "file:../node_modules/axios",
+    "antd": "^4.21.7",
     "react": "file:../node_modules/react",
-    "react-dom": "file:../node_modules/react-dom",
-    "react-scripts": "file:../node_modules/react-scripts"
+    "react-dom": "file:../node_modules/react-dom"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -24,5 +22,15 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "@craco/craco": "^6.4.5",
+    "@kne/md-doc": "^0.1.2",
+    "chokidar": "^3.5.3",
+    "craco-antd": "^2.0.0",
+    "cross-spawn-promise": "^0.10.2",
+    "fs-extra": "^10.1.0",
+    "node-sass": "^7.0.1",
+    "react-scripts": "^5.0.1"
+  }
 }
