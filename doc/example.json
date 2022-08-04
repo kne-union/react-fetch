@@ -142,6 +142,17 @@
           "packageName": "antd/lib/list"
         }
       ]
+    },
+    {
+      "title": "用loader加载数据",
+      "description": "展示了用loader来加载数据的例子",
+      "code": "./loader.code",
+      "scope": [
+        {
+          "name": "ReactFetch",
+          "packageName": "@kne/react-fetch"
+        }
+      ]
     }
   ]
 }

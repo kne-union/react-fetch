@@ -1,4 +1,4 @@
-import {useRef, useEffect, useState} from 'react';
+import {useRef, useEffect, useState, useMemo} from 'react';
 import objectHash from "object-hash";
 import {createRunner} from './plugins';
 import pick from 'lodash/pick';
@@ -34,7 +34,7 @@ const useFetch = (fetcherOptions) => {
 
     const pluginRunnerRef = useRef();
 
-    useEffect(() => {
+    useMemo(() => {
         pluginRunnerRef.current = createRunner({
             getProps: () => propsRef.current,
             getRequestToken: () => requestTokenRef.current,

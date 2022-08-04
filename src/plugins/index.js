@@ -27,6 +27,9 @@ export const createRunner = (componentContext) => {
             runPath: [],
             output: null
         };
+
+        const {debug} = componentContext.getProps();
+
         for (let currentPlugin of allPlugins) {
             try {
                 // 依赖检查，依赖插件没有成功运行，跳过插件
@@ -35,7 +38,13 @@ export const createRunner = (componentContext) => {
                 })) {
                     continue;
                 }
+                if (debug === true) {
+                    console.info('react-fetch:plugin-' + currentPlugin.id + ':start', pluginContext);
+                }
                 const output = await currentPlugin.plugin(props, pluginContext);
+                if (debug === true) {
+                    console.info('react-fetch:plugin-' + currentPlugin.id + ':complete', output);
+                }
                 pluginContext.outputStack[currentPlugin.id] = output;
                 pluginContext.output = output !== void (0) ? output : pluginContext.output;
                 pluginContext.runPath.push(currentPlugin.id);

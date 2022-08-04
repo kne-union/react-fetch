@@ -20,7 +20,7 @@ class Cache {
             return;
         }
         try {
-            const dataString = window.localStorage.getItem(this.localName || Cache.KEY_NAME);
+            const dataString = window.localStorage && window.localStorage.getItem(this.localName || Cache.KEY_NAME);
             if (!dataString) {
                 return;
             }
@@ -47,7 +47,7 @@ class Cache {
                     output[key] = Object.assign({}, props, {value: data[index]});
                 }
             });
-            window.localStorage.setItem(this.localName || Cache.KEY_NAME, JSON.stringify(output));
+            window.localStorage && window.localStorage.setItem(this.localName || Cache.KEY_NAME, JSON.stringify(output));
         });
     }
 

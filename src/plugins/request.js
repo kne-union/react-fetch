@@ -12,8 +12,8 @@ export default {
         }
         const token = context.componentContext.getRequestToken();
         context.componentContext.requestParams = context.outputStack['params'];
-        context.componentContext.setRequestParams(context.outputStack['params']);
-        const requestPromise = force !== true && get(context.globalContext.pendingRequest, token) || globalParams.ajax(context.outputStack['params']);
+        const {ajax} = context.componentContext.getProps();
+        const requestPromise = force !== true && get(context.globalContext.pendingRequest, token) || (ajax || globalParams.ajax)(context.outputStack['params']);
         context.globalContext.pendingRequest = Object.assign({}, context.globalContext.pendingRequest, {[token]: requestPromise});
         return requestPromise.then((data) => {
             delete context.globalContext.pendingRequest[token];

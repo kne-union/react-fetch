@@ -1,13 +1,13 @@
-import * as component_774 from '@kne/react-fetch';
-import * as component_775 from 'antd/lib/input';
-import * as component_776 from 'antd/lib/spin';
-import * as component_777 from 'antd/lib/empty';
-import * as component_778 from 'antd/lib/result';
-import * as component_779 from 'antd/lib/space';
-import * as component_780 from 'lodash';
-import * as component_781 from 'antd/lib/list';
-import * as component_782 from 'antd/lib/button';
-import * as component_783 from 'antd/lib/pagination';
+import * as component_401 from '@kne/react-fetch';
+import * as component_402 from 'antd/lib/input';
+import * as component_403 from 'antd/lib/spin';
+import * as component_404 from 'antd/lib/empty';
+import * as component_405 from 'antd/lib/result';
+import * as component_406 from 'antd/lib/space';
+import * as component_407 from 'lodash';
+import * as component_408 from 'antd/lib/list';
+import * as component_409 from 'antd/lib/button';
+import * as component_410 from 'antd/lib/pagination';
 const readmeConfig = {
     name: `@kne/react-fetch`,
     description: `用于获取数据的react组件`,
@@ -19,10 +19,10 @@ const readmeConfig = {
 <p>在url，data，options其中之一发生改变的时候，组件会自动发出一个新的请求去请求数据</p>
 </li>
 <li>
-<p>可以传入多个请求，并发发送，在所有请求成功后渲染业务组件，当某一个请求的参数发生变化，单独发送这一个请求成功后渲染业务组件</p>
+<p>底层采用 <a href="https://github.com/axios/axios">axios</a> 易于扩展</p>
 </li>
 <li>
-<p>底层采用 <a href="https://github.com/axios/axios">axios</a> 易于扩展</p>
+<p>插件式设计，方便追踪每一步的调用堆栈信息，易于扩展</p>
 </li>
 <li>
 <p>用preset预制设置，全局生效，不用在每次调用都设置一些通用属性</p>
@@ -48,13 +48,13 @@ const readmeConfig = {
 <tr>
 <td>data</td>
 <td>POST请求的data</td>
-<td>obj</td>
+<td>object</td>
 <td>-</td>
 </tr>
 <tr>
 <td>params</td>
 <td>GET请求的query</td>
-<td>obj</td>
+<td>object</td>
 <td>-</td>
 </tr>
 <tr>
@@ -72,7 +72,7 @@ const readmeConfig = {
 <tr>
 <td>error</td>
 <td>请求返回后code不为200时渲染的组件，如果传入函数，参数中会接收到请求返回的错误msg</td>
-<td>jsx|func</td>
+<td>jsx|function</td>
 <td>null</td>
 </tr>
 <tr>
@@ -84,7 +84,7 @@ const readmeConfig = {
 <tr>
 <td>isEmpty</td>
 <td>判断响应数据是否是空状态</td>
-<td>bool</td>
+<td>boolean</td>
 <td>-</td>
 </tr>
 <tr>
@@ -96,13 +96,25 @@ const readmeConfig = {
 <tr>
 <td>component</td>
 <td>请求返回成功时需要渲染的组件</td>
-<td>React Component</td>
+<td>jsx</td>
 <td>-</td>
 </tr>
 <tr>
 <td>render</td>
 <td>请求返回成功时执行的方法，改方法需要返回jsx，参数可以拿到{data,refresh,setData}，当存在component时改方法不会被执行</td>
-<td>func</td>
+<td>function</td>
+<td>-</td>
+</tr>
+<tr>
+<td>loader</td>
+<td>当该参数存在时，组件会优先执行loader去获取数据，而不会用ajax去发送请求，注意其请求的返回结果页不会transformResponse转换，也不会通过结果的code去判断请求是否成功，如果loader返回的Promise为resolve就判定为请求成功。其返回数据也会原样传给组件的data不会再data.results取值</td>
+<td>function</td>
+<td>-</td>
+</tr>
+<tr>
+<td>ajax</td>
+<td>通常情况下你不需要传入这个参数,该参数默认取preset中的ajax。当你需要一个完全不同于全局的ajax发送请求的时候可以通过该参数为次组件设置一个新的ajax对象</td>
+<td>axios object</td>
 <td>-</td>
 </tr>
 </tbody>
@@ -134,26 +146,56 @@ const readmeConfig = {
 <tr>
 <td>data</td>
 <td>POST请求的data</td>
-<td>obj</td>
+<td>object</td>
 <td>-</td>
 </tr>
 <tr>
 <td>params</td>
 <td>GET请求的query</td>
-<td>obj</td>
+<td>object</td>
 <td>-</td>
 </tr>
 <tr>
 <td>options</td>
 <td>请求的其他参数，如method,headers等，详细请参考<a href="https://github.com/axios/axios">axios</a></td>
-<td>obj</td>
+<td>object</td>
 <td>-</td>
 </tr>
 <tr>
 <td>auto</td>
 <td>是否自动发送请求，如果为false需要手动调用refresh方法才会发送请求，并且url,data,options发生变化后不会自动发送新的请求</td>
-<td>bool</td>
+<td>boolean</td>
 <td>true</td>
+</tr>
+<tr>
+<td>debug</td>
+<td>是否开启调试，开启以后可以在控制台打印整个组件的plugin执行堆栈，可以帮助排查问题</td>
+<td>boolean</td>
+<td>false</td>
+</tr>
+<tr>
+<td>onRequestStart</td>
+<td>请求开始时回调方法</td>
+<td>function</td>
+<td>-</td>
+</tr>
+<tr>
+<td>onRequestError</td>
+<td>请求发生错误时回调方法</td>
+<td>function</td>
+<td>-</td>
+</tr>
+<tr>
+<td>onRequestSuccess</td>
+<td>请求成功时回调方法</td>
+<td>function</td>
+<td>-</td>
+</tr>
+<tr>
+<td>onRequestComplete</td>
+<td>请求完成时（包括成功和失败）的回调方法</td>
+<td>function</td>
+<td>-</td>
 </tr>
 </tbody>
 </table>
@@ -170,17 +212,17 @@ const readmeConfig = {
 <tr>
 <td>isLoading</td>
 <td>当前fetch组件是否正在加载</td>
-<td>bool</td>
+<td>boolean</td>
 </tr>
 <tr>
 <td>isComplete</td>
 <td>当前fetch组件是否已完成</td>
-<td>bool</td>
+<td>boolean</td>
 </tr>
 <tr>
 <td>error</td>
 <td>当前组件的请求错误信息</td>
-<td>bool</td>
+<td>boolean</td>
 </tr>
 <tr>
 <td>data</td>
@@ -190,7 +232,7 @@ const readmeConfig = {
 <tr>
 <td>refresh</td>
 <td>可以调用它手动重新发送请求的方法</td>
-<td>func</td>
+<td>function</td>
 </tr>
 <tr>
 <td>reload</td>
@@ -200,12 +242,17 @@ const readmeConfig = {
 <tr>
 <td>setData</td>
 <td>可以调用它给fetch中保存值的state赋值</td>
-<td>func</td>
+<td>function</td>
 </tr>
 <tr>
 <td>requestParams</td>
 <td>当前请求的实际参数</td>
-<td>obj</td>
+<td>object</td>
+</tr>
+<tr>
+<td>fetchProps</td>
+<td>Fetch组件接受到的请求参数,它和requestParams的区别在于，只有当Fetch的参数发生修改fetchProps的值会修改，通过send，reload,refresh修改请求参数，fetchProps的值不会修改，requestParams却始终时实际发送请求的参数</td>
+<td>object</td>
 </tr>
 </tbody>
 </table>
@@ -224,7 +271,7 @@ const readmeConfig = {
 <tr>
 <td>ajax</td>
 <td>axios实例</td>
-<td>obj</td>
+<td>object</td>
 <td>-</td>
 </tr>
 <tr>
@@ -236,7 +283,7 @@ const readmeConfig = {
 <tr>
 <td>error</td>
 <td>请求返回后code不为200时渲染的组件，如果传入函数，参数中会接收到请求返回的错误msg</td>
-<td>jsx|func</td>
+<td>jsx|function</td>
 <td>null</td>
 </tr>
 <tr>
@@ -248,7 +295,7 @@ const readmeConfig = {
 <tr>
 <td>transformResponse</td>
 <td>请求转换器，参数为response返回值为response需要在此方法将请求返回结果转换成规定的格式</td>
-<td>func</td>
+<td>function</td>
 <td>-</td>
 </tr>
 </tbody>
@@ -266,9 +313,9 @@ const readmeConfig = {
 </thead>
 <tbody>
 <tr>
-<td>cache为</td>
-<td>true或者为字符串的时候为开启缓存，如果请求参数完全一致则命中缓存。如果cache为字符串，只有cahce一致的组件之间会命中缓存</td>
-<td>bool,string</td>
+<td>cache</td>
+<td>为true或者为字符串的时候为开启缓存，如果请求参数完全一致则命中缓存。如果cache为字符串，只有cahce一致的组件之间会命中缓存</td>
+<td>boolean|string</td>
 <td>-</td>
 </tr>
 <tr>
@@ -289,17 +336,14 @@ const readmeConfig = {
         isFull: false,
         className: `react_fetch_6e9ee`,
         style: `.react_fetch_6e9ee .ant-space-vertical {
-  width: 100%;
-}
+  width: 100%; }
 
 .react_fetch_6e9ee .load-container {
   height: 300px;
-  overflow: auto;
-}
+  overflow: auto; }
 
 .react_fetch_6e9ee .scroller-no-more {
-  text-align: center;
-}
+  text-align: center; }
 `,
         list: [{
     title: `preset设置`,
@@ -386,31 +430,31 @@ render(<Preset/>);
     scope: [{
     name: "ReactFetch",
     packageName: "@kne/react-fetch",
-    component: component_774
+    component: component_401
 },{
     name: "AntdInput",
     packageName: "antd/lib/input",
-    component: component_775
+    component: component_402
 },{
     name: "AntdSpin",
     packageName: "antd/lib/spin",
-    component: component_776
+    component: component_403
 },{
     name: "AntdEmpty",
     packageName: "antd/lib/empty",
-    component: component_777
+    component: component_404
 },{
     name: "AntdResult",
     packageName: "antd/lib/result",
-    component: component_778
+    component: component_405
 },{
     name: "AntdSpace",
     packageName: "antd/lib/space",
-    component: component_779
+    component: component_406
 },{
     name: "_",
     packageName: "lodash",
-    component: component_780
+    component: component_407
 }]
 },{
     title: `请求成功`,
@@ -434,11 +478,11 @@ render(<Remote/>);
     scope: [{
     name: "ReactFetch",
     packageName: "@kne/react-fetch",
-    component: component_774
+    component: component_401
 },{
     name: "AntdList",
     packageName: "antd/lib/list",
-    component: component_781
+    component: component_408
 }]
 },{
     title: `请求失败`,
@@ -457,7 +501,7 @@ render(<Error/>);
     scope: [{
     name: "ReactFetch",
     packageName: "@kne/react-fetch",
-    component: component_774
+    component: component_401
 }]
 },{
     title: `分页数据请求`,
@@ -507,27 +551,27 @@ render(<Remote/>);
     scope: [{
     name: "ReactFetch",
     packageName: "@kne/react-fetch",
-    component: component_774
+    component: component_401
 },{
     name: "AntdButton",
     packageName: "antd/lib/button",
-    component: component_782
+    component: component_409
 },{
     name: "AntdPagination",
     packageName: "antd/lib/pagination",
-    component: component_783
+    component: component_410
 },{
     name: "AntdSpace",
     packageName: "antd/lib/space",
-    component: component_779
+    component: component_406
 },{
     name: "AntdList",
     packageName: "antd/lib/list",
-    component: component_781
+    component: component_408
 },{
     name: "_",
     packageName: "lodash",
-    component: component_780
+    component: component_407
 }]
 },{
     title: `下拉加载更多`,
@@ -613,31 +657,31 @@ render(<Remote/>);
     scope: [{
     name: "ReactFetch",
     packageName: "@kne/react-fetch",
-    component: component_774
+    component: component_401
 },{
     name: "AntdButton",
     packageName: "antd/lib/button",
-    component: component_782
+    component: component_409
 },{
     name: "AntdPagination",
     packageName: "antd/lib/pagination",
-    component: component_783
+    component: component_410
 },{
     name: "AntdSpace",
     packageName: "antd/lib/space",
-    component: component_779
+    component: component_406
 },{
     name: "AntdList",
     packageName: "antd/lib/list",
-    component: component_781
+    component: component_408
 },{
     name: "_",
     packageName: "lodash",
-    component: component_780
+    component: component_407
 },{
     name: "AntdSpin",
     packageName: "antd/lib/spin",
-    component: component_776
+    component: component_403
 }]
 },{
     title: `空数据`,
@@ -662,11 +706,38 @@ render(<Remote/>);
     scope: [{
     name: "ReactFetch",
     packageName: "@kne/react-fetch",
-    component: component_774
+    component: component_401
 },{
     name: "AntdList",
     packageName: "antd/lib/list",
-    component: component_781
+    component: component_408
+}]
+},{
+    title: `用loader加载数据`,
+    description: `展示了用loader来加载数据的例子`,
+    code: `const {createWithFetch} = ReactFetch;
+
+
+const Example = createWithFetch({
+    loader: async (data) => {
+        return await new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve(Object.assign({}, data, {message: '请求成功'}));
+            }, 1000);
+        });
+    }
+})(({data,requestParams}) => {
+    console.log(requestParams);
+    return JSON.stringify(data, null, 2);
+});
+
+render(<Example data={{name: 'jack'}}/>);
+
+`,
+    scope: [{
+    name: "ReactFetch",
+    packageName: "@kne/react-fetch",
+    component: component_401
 }]
 }]
     }
