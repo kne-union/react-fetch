@@ -1,13 +1,13 @@
-import * as component_401 from '@kne/react-fetch';
-import * as component_402 from 'antd/lib/input';
-import * as component_403 from 'antd/lib/spin';
-import * as component_404 from 'antd/lib/empty';
-import * as component_405 from 'antd/lib/result';
-import * as component_406 from 'antd/lib/space';
-import * as component_407 from 'lodash';
-import * as component_408 from 'antd/lib/list';
-import * as component_409 from 'antd/lib/button';
-import * as component_410 from 'antd/lib/pagination';
+import * as component_121 from '@kne/react-fetch';
+import * as component_122 from 'antd/lib/input';
+import * as component_123 from 'antd/lib/spin';
+import * as component_124 from 'antd/lib/empty';
+import * as component_125 from 'antd/lib/result';
+import * as component_126 from 'antd/lib/space';
+import * as component_127 from 'lodash';
+import * as component_128 from 'antd/lib/list';
+import * as component_129 from 'antd/lib/button';
+import * as component_130 from 'antd/lib/pagination';
 const readmeConfig = {
     name: `@kne/react-fetch`,
     description: `用于获取数据的react组件`,
@@ -113,8 +113,14 @@ const readmeConfig = {
 </tr>
 <tr>
 <td>ajax</td>
-<td>通常情况下你不需要传入这个参数,该参数默认取preset中的ajax。当你需要一个完全不同于全局的ajax发送请求的时候可以通过该参数为次组件设置一个新的ajax对象</td>
+<td>通常情况下你不需要传入这个参数,该参数默认取preset中的ajax。当你需要一个完全不同于全局的ajax发送请求的时候可以通过该参数为此组件设置一个新的ajax对象</td>
 <td>axios object</td>
+<td>-</td>
+</tr>
+<tr>
+<td>transformResponse</td>
+<td>通常情况下你不需要传入这个参数,该参数默认取preset中的transformResponse。当你需要一个完全不同于全局的响应数据转换器的时候可以通过该参数为此组件设置</td>
+<td>function</td>
 <td>-</td>
 </tr>
 </tbody>
@@ -430,31 +436,31 @@ render(<Preset/>);
     scope: [{
     name: "ReactFetch",
     packageName: "@kne/react-fetch",
-    component: component_401
+    component: component_121
 },{
     name: "AntdInput",
     packageName: "antd/lib/input",
-    component: component_402
+    component: component_122
 },{
     name: "AntdSpin",
     packageName: "antd/lib/spin",
-    component: component_403
+    component: component_123
 },{
     name: "AntdEmpty",
     packageName: "antd/lib/empty",
-    component: component_404
+    component: component_124
 },{
     name: "AntdResult",
     packageName: "antd/lib/result",
-    component: component_405
+    component: component_125
 },{
     name: "AntdSpace",
     packageName: "antd/lib/space",
-    component: component_406
+    component: component_126
 },{
     name: "_",
     packageName: "lodash",
-    component: component_407
+    component: component_127
 }]
 },{
     title: `请求成功`,
@@ -478,11 +484,11 @@ render(<Remote/>);
     scope: [{
     name: "ReactFetch",
     packageName: "@kne/react-fetch",
-    component: component_401
+    component: component_121
 },{
     name: "AntdList",
     packageName: "antd/lib/list",
-    component: component_408
+    component: component_128
 }]
 },{
     title: `请求失败`,
@@ -501,7 +507,7 @@ render(<Error/>);
     scope: [{
     name: "ReactFetch",
     packageName: "@kne/react-fetch",
-    component: component_401
+    component: component_121
 }]
 },{
     title: `分页数据请求`,
@@ -551,27 +557,27 @@ render(<Remote/>);
     scope: [{
     name: "ReactFetch",
     packageName: "@kne/react-fetch",
-    component: component_401
+    component: component_121
 },{
     name: "AntdButton",
     packageName: "antd/lib/button",
-    component: component_409
+    component: component_129
 },{
     name: "AntdPagination",
     packageName: "antd/lib/pagination",
-    component: component_410
+    component: component_130
 },{
     name: "AntdSpace",
     packageName: "antd/lib/space",
-    component: component_406
+    component: component_126
 },{
     name: "AntdList",
     packageName: "antd/lib/list",
-    component: component_408
+    component: component_128
 },{
     name: "_",
     packageName: "lodash",
-    component: component_407
+    component: component_127
 }]
 },{
     title: `下拉加载更多`,
@@ -657,31 +663,31 @@ render(<Remote/>);
     scope: [{
     name: "ReactFetch",
     packageName: "@kne/react-fetch",
-    component: component_401
+    component: component_121
 },{
     name: "AntdButton",
     packageName: "antd/lib/button",
-    component: component_409
+    component: component_129
 },{
     name: "AntdPagination",
     packageName: "antd/lib/pagination",
-    component: component_410
+    component: component_130
 },{
     name: "AntdSpace",
     packageName: "antd/lib/space",
-    component: component_406
+    component: component_126
 },{
     name: "AntdList",
     packageName: "antd/lib/list",
-    component: component_408
+    component: component_128
 },{
     name: "_",
     packageName: "lodash",
-    component: component_407
+    component: component_127
 },{
     name: "AntdSpin",
     packageName: "antd/lib/spin",
-    component: component_403
+    component: component_123
 }]
 },{
     title: `空数据`,
@@ -706,11 +712,11 @@ render(<Remote/>);
     scope: [{
     name: "ReactFetch",
     packageName: "@kne/react-fetch",
-    component: component_401
+    component: component_121
 },{
     name: "AntdList",
     packageName: "antd/lib/list",
-    component: component_408
+    component: component_128
 }]
 },{
     title: `用loader加载数据`,
@@ -737,7 +743,45 @@ render(<Example data={{name: 'jack'}}/>);
     scope: [{
     name: "ReactFetch",
     packageName: "@kne/react-fetch",
-    component: component_401
+    component: component_121
+}]
+},{
+    title: `transform`,
+    description: `展示transformResponse的调用`,
+    code: `const {createWithFetch} = ReactFetch;
+const {default: List} = AntdList;
+
+const Remote = createWithFetch({
+    url: '/data1',
+    transformResponse: (response) => {
+        console.log(response);
+        return {
+            data:{
+                code: 200, results: [
+                    {title: '我是response被拦截以后的内容'}
+                ]
+            }
+        };
+    }
+})(({data}) => {
+    return <List bordered>
+        {data.map((item, index) => {
+            return <List.Item key={index}>{item.title}</List.Item>
+        })}
+    </List>;
+});
+
+render(<Remote/>);
+
+`,
+    scope: [{
+    name: "ReactFetch",
+    packageName: "@kne/react-fetch",
+    component: component_121
+},{
+    name: "AntdList",
+    packageName: "antd/lib/list",
+    component: component_128
 }]
 }]
     }

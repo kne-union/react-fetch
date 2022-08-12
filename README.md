@@ -350,6 +350,38 @@ render(<Example data={{name: 'jack'}}/>);
 
 ```
 
+- transform
+- 展示transformResponse的调用
+- ReactFetch(@kne/react-fetch),AntdList(antd/lib/list)
+
+```jsx
+const {createWithFetch} = ReactFetch;
+const {default: List} = AntdList;
+
+const Remote = createWithFetch({
+    url: '/data1',
+    transformResponse: (response) => {
+        console.log(response);
+        return {
+            data:{
+                code: 200, results: [
+                    {title: '我是response被拦截以后的内容'}
+                ]
+            }
+        };
+    }
+})(({data}) => {
+    return <List bordered>
+        {data.map((item, index) => {
+            return <List.Item key={index}>{item.title}</List.Item>
+        })}
+    </List>;
+});
+
+render(<Remote/>);
+
+```
+
 
 ### API
 
@@ -369,7 +401,8 @@ render(<Example data={{name: 'jack'}}/>);
 | component | 请求返回成功时需要渲染的组件                                                                                                                                                         | jsx               | -    |
 | render    | 请求返回成功时执行的方法，改方法需要返回jsx，参数可以拿到{data,refresh,setData}，当存在component时改方法不会被执行                                                                                             | function          | -    |
 | loader    | 当该参数存在时，组件会优先执行loader去获取数据，而不会用ajax去发送请求，注意其请求的返回结果页不会transformResponse转换，也不会通过结果的code去判断请求是否成功，如果loader返回的Promise为resolve就判定为请求成功。其返回数据也会原样传给组件的data不会再data.results取值 | function          |-|
-| ajax      | 通常情况下你不需要传入这个参数,该参数默认取preset中的ajax。当你需要一个完全不同于全局的ajax发送请求的时候可以通过该参数为次组件设置一个新的ajax对象                                                                                    | axios object      |-|
+| ajax      | 通常情况下你不需要传入这个参数,该参数默认取preset中的ajax。当你需要一个完全不同于全局的ajax发送请求的时候可以通过该参数为此组件设置一个新的ajax对象                                                                                    | axios object      |-|
+| transformResponse| 通常情况下你不需要传入这个参数,该参数默认取preset中的transformResponse。当你需要一个完全不同于全局的响应数据转换器的时候可以通过该参数为此组件设置                                                                                  |function|-|
 
 #### withFetch
 

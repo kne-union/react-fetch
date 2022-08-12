@@ -153,6 +153,21 @@
           "packageName": "@kne/react-fetch"
         }
       ]
+    },
+    {
+      "title": "transform",
+      "description": "展示transformResponse的调用",
+      "code": "./transform.code",
+      "scope": [
+        {
+          "name": "ReactFetch",
+          "packageName": "@kne/react-fetch"
+        },
+        {
+          "name": "AntdList",
+          "packageName": "antd/lib/list"
+        }
+      ]
     }
   ]
 }

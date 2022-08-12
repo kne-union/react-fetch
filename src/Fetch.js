@@ -17,7 +17,7 @@ const Fetch = forwardRef(({component, render, loading, isEmpty, empty, error: er
         loadMore,
         setData
     } = useFetch(props);
-    const fetchPropsList = ['url', 'params', 'method', 'data', 'cache', 'ttl', 'isLocal', 'auto', 'loader', 'options', 'updateType', 'onRequestError', 'onRequestSuccess', 'onRequestComplete', 'onRequestStart', 'debug', 'ajax'];
+    const fetchPropsList = ['url', 'params', 'method', 'data', 'cache', 'ttl', 'isLocal', 'auto', 'loader', 'options', 'updateType', 'onRequestError', 'onRequestSuccess', 'onRequestComplete', 'onRequestStart', 'debug', 'ajax', 'transformResponse'];
     const otherProps = omit(props, fetchPropsList);
     const fetchProps = pick(props, fetchPropsList);
     useImperativeHandle(ref, () => {
