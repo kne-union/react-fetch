@@ -9,6 +9,7 @@ class Cache {
         const {ttl, maxLength, isLocal, localName} = Object.assign({}, options);
         this.ttl = ttl || 0;
         this.data = {};
+        this.cacheNameMapping = {};
         this.maxLength = maxLength || 1000;
         this.isLocal = localName ? true : isLocal;
         this.localName = localName;
@@ -41,7 +42,7 @@ class Cache {
         const keys = Object.keys(this.data);
         Promise.all(keys.map((key) => this.data[key].value)).then((data) => {
             const output = {};
-            keys.forEach((key, index) => {
+            Object.keys(this.data).forEach((key, index) => {
                 const {isLocal, ...props} = this.data[key];
                 if (isLocal === true) {
                     output[key] = Object.assign({}, props, {value: data[index]});
@@ -65,6 +66,15 @@ class Cache {
         return val;
     }
 
+    delByCacheName(cacheName) {
+        if (this.cacheNameMapping[cacheName]) {
+            this.cacheNameMapping[cacheName].forEach((key) => {
+                this.del(key);
+            });
+            this.cacheNameMapping[cacheName].clear();
+        }
+    }
+
     del(key) {
         const oldValue = this.get(key);
         delete this.data[key];
@@ -73,7 +83,7 @@ class Cache {
     }
 
     put(key, val, options) {
-        let {ttl, isLocal} = options;
+        let {ttl, isLocal, cacheName} = options;
         if (ttl === undefined) {
             ttl = this.ttl;
         }
@@ -88,6 +98,12 @@ class Cache {
             }
             const now = Cache.now();
             this.data[key] = {expires: ttl === 0 ? null : now + ttl, value: val, createTime: now, isLocal};
+            if (cacheName && !this.cacheNameMapping[cacheName]) {
+                this.cacheNameMapping[cacheName] = new Set();
+            }
+            if (cacheName) {
+                this.cacheNameMapping[cacheName].add(key);
+            }
         }
         this._save();
         return oldValue;

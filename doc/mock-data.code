@@ -12,6 +12,7 @@ preset({
         return new Promise((resolve) => {
             setTimeout(() => {
                 if (config.url === '/data1') {
+                    console.log('data1 request');
                     resolve({
                         data: {
                             code: 0,

@@ -23,6 +23,8 @@ export const globalParams = {
     }
 };
 
+export const getCache = () => globalParams.cache;
+
 export default (newOptions) => {
     return Object.assign(globalParams, newOptions);
 };

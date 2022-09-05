@@ -69,6 +69,7 @@ preset({
         return new Promise((resolve) => {
             setTimeout(() => {
                 if (config.url === '/data1') {
+                    console.log('data1 request');
                     resolve({
                         data: {
                             code: 0,
@@ -379,6 +380,49 @@ const Remote = createWithFetch({
 });
 
 render(<Remote/>);
+
+```
+
+- 缓存操作
+- 展示缓存操作
+- ReactFetch(@kne/react-fetch),AntdList(antd/lib/list),space(antd/lib/space),button(antd/lib/button)
+
+```jsx
+const {createWithFetch, getCache} = ReactFetch;
+const {default: List} = AntdList;
+const {default: Space} = space;
+const {default: Button} = button;
+const {useRef} = React;
+
+const Remote = createWithFetch({
+    url: '/data1',
+    cache: 'cache'
+})(({data}) => {
+    return <List bordered>
+        {data.map((item, index) => {
+            return <List.Item key={index}>{item.title}</List.Item>
+        })}
+    </List>;
+});
+
+const cache = getCache();
+
+const Example = () => {
+    const ref = useRef();
+    return <Space direction="vertical">
+        <Remote ref={ref}/>
+        <Space>
+            <Button onClick={() => {
+                ref.current.reload({}, false);
+            }}>获取数据</Button>
+            <Button onClick={() => {
+                cache.delByCacheName('cache');
+            }}>清除缓存</Button>
+        </Space>
+    </Space>;
+};
+
+render(<Example/>);
 
 ```
 

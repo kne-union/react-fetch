@@ -168,6 +168,29 @@
           "packageName": "antd/lib/list"
         }
       ]
+    },
+    {
+      "title": "缓存操作",
+      "description": "展示缓存操作",
+      "code": "./cache.code",
+      "scope": [
+        {
+          "name": "ReactFetch",
+          "packageName": "@kne/react-fetch"
+        },
+        {
+          "name": "AntdList",
+          "packageName": "antd/lib/list"
+        },
+        {
+          "name": "space",
+          "packageName": "antd/lib/space"
+        },
+        {
+          "name": "button",
+          "packageName": "antd/lib/button"
+        }
+      ]
     }
   ]
 }
