@@ -154,6 +154,32 @@ render(<Remote/>);
 
 ```
 
+- 使用Fetch组件发送请求
+- 使用Fetch组件发送一个成功请求，内部组件拿到数据并展示数据
+- ReactFetch(@kne/react-fetch),AntdList(antd/lib/list)
+
+```jsx
+const {default: Fetch} = ReactFetch;
+const {default: List} = AntdList;
+
+const Remote = () => {
+    return <Fetch url="/data1" loader={() => {
+        return new Promise((resolve) => {
+            resolve([{title:'loader数据'}]);
+        })
+    }} render={({data}) => {
+        return <List bordered>
+            {data.map((item, index) => {
+                return <List.Item key={index}>{item.title}</List.Item>
+            })}
+        </List>
+    }}/>
+};
+
+render(<Remote/>);
+
+```
+
 - 请求失败
 - 发送一个失败请求，内部组件不渲染，直接展示错误信息
 - ReactFetch(@kne/react-fetch)

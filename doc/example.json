@@ -52,6 +52,21 @@
       ]
     },
     {
+      "title": "使用Fetch组件发送请求",
+      "description": "使用Fetch组件发送一个成功请求，内部组件拿到数据并展示数据",
+      "code": "./fetch.code",
+      "scope": [
+        {
+          "name": "ReactFetch",
+          "packageName": "@kne/react-fetch"
+        },
+        {
+          "name": "AntdList",
+          "packageName": "antd/lib/list"
+        }
+      ]
+    },
+    {
       "title": "请求失败",
       "description": "发送一个失败请求，内部组件不渲染，直接展示错误信息",
       "code": "./error.code",
