@@ -1,5 +1,5 @@
 const {createWithFetch} = ReactFetch;
-const {default: List} = AntdList;
+const {List} = antd;
 
 const Remote = createWithFetch({
     url: '/data1'

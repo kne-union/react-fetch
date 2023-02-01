@@ -10,7 +10,7 @@
   "dependencies": {
     "@kne/example-driver": "^0.1.0",
     "@kne/react-fetch": "file:..",
-    "antd": "^4.21.7",
+    "antd": "^5.0.7",
     "react": "file:../node_modules/react",
     "react-dom": "file:../node_modules/react-dom"
   },
@@ -27,7 +27,6 @@
     "@craco/craco": "^6.4.5",
     "@kne/md-doc": "^0.1.2",
     "chokidar": "^3.5.3",
-    "craco-antd": "^2.0.0",
     "cross-spawn-promise": "^0.10.2",
     "fs-extra": "^10.1.0",
     "node-sass": "^7.0.1",

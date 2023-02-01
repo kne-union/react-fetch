@@ -11,24 +11,8 @@
           "packageName": "@kne/react-fetch"
         },
         {
-          "name": "AntdInput",
-          "packageName": "antd/lib/input"
-        },
-        {
-          "name": "AntdSpin",
-          "packageName": "antd/lib/spin"
-        },
-        {
-          "name": "AntdEmpty",
-          "packageName": "antd/lib/empty"
-        },
-        {
-          "name": "AntdResult",
-          "packageName": "antd/lib/result"
-        },
-        {
-          "name": "AntdSpace",
-          "packageName": "antd/lib/space"
+          "name": "antd",
+          "packageName": "antd"
         },
         {
           "name": "_",
@@ -46,8 +30,8 @@
           "packageName": "@kne/react-fetch"
         },
         {
-          "name": "AntdList",
-          "packageName": "antd/lib/list"
+          "name": "antd",
+          "packageName": "antd"
         }
       ]
     },
@@ -61,8 +45,8 @@
           "packageName": "@kne/react-fetch"
         },
         {
-          "name": "AntdList",
-          "packageName": "antd/lib/list"
+          "name": "antd",
+          "packageName": "antd"
         }
       ]
     },
@@ -87,20 +71,8 @@
           "packageName": "@kne/react-fetch"
         },
         {
-          "name": "AntdButton",
-          "packageName": "antd/lib/button"
-        },
-        {
-          "name": "AntdPagination",
-          "packageName": "antd/lib/pagination"
-        },
-        {
-          "name": "AntdSpace",
-          "packageName": "antd/lib/space"
-        },
-        {
-          "name": "AntdList",
-          "packageName": "antd/lib/list"
+          "name": "antd",
+          "packageName": "antd"
         },
         {
           "name": "_",
@@ -118,28 +90,12 @@
           "packageName": "@kne/react-fetch"
         },
         {
-          "name": "AntdButton",
-          "packageName": "antd/lib/button"
-        },
-        {
-          "name": "AntdPagination",
-          "packageName": "antd/lib/pagination"
-        },
-        {
-          "name": "AntdSpace",
-          "packageName": "antd/lib/space"
-        },
-        {
-          "name": "AntdList",
-          "packageName": "antd/lib/list"
+          "name": "antd",
+          "packageName": "antd"
         },
         {
           "name": "_",
           "packageName": "lodash"
-        },
-        {
-          "name": "AntdSpin",
-          "packageName": "antd/lib/spin"
         }
       ]
     },
@@ -153,8 +109,8 @@
           "packageName": "@kne/react-fetch"
         },
         {
-          "name": "AntdList",
-          "packageName": "antd/lib/list"
+          "name": "antd",
+          "packageName": "antd"
         }
       ]
     },
@@ -179,8 +135,8 @@
           "packageName": "@kne/react-fetch"
         },
         {
-          "name": "AntdList",
-          "packageName": "antd/lib/list"
+          "name": "antd",
+          "packageName": "antd"
         }
       ]
     },
@@ -194,16 +150,8 @@
           "packageName": "@kne/react-fetch"
         },
         {
-          "name": "AntdList",
-          "packageName": "antd/lib/list"
-        },
-        {
-          "name": "space",
-          "packageName": "antd/lib/space"
-        },
-        {
-          "name": "button",
-          "packageName": "antd/lib/button"
+          "name": "antd",
+          "packageName": "antd"
         }
       ]
     }

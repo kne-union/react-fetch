@@ -1,15 +1,18 @@
 
 # react-fetch
 
+
 ### 描述
 
 用于获取数据的react组件
+
 
 ### 安装
 
 ```shell
 npm i --save @kne/react-fetch
 ```
+
 
 ### 概述
 
@@ -52,15 +55,11 @@ npm i --save @kne/react-fetch
 ajax为一个axios实例，每个实例的拦截器可能不同，默认会在内部自动创建一个axios实例，但是没有任何拦截器，如果想给其添加拦截器，可以自行创建axios实例通过preset设置
 preset 可以单独放一个文件里，在入口文件顶部引入。
 preset全局设置一次即可。
-- ReactFetch(@kne/react-fetch),AntdInput(antd/lib/input),AntdSpin(antd/lib/spin),AntdEmpty(antd/lib/empty),AntdResult(antd/lib/result),AntdSpace(antd/lib/space),_(lodash)
+- ReactFetch(@kne/react-fetch),antd(antd),_(lodash)
 
 ```jsx
 const {preset} = ReactFetch;
-const {default: Input} = AntdInput;
-const {default: Spin} = AntdSpin;
-const {default: Empty} = AntdEmpty;
-const {default: Result} = AntdResult;
-const {default: Space} = AntdSpace;
+const {Input,Spin,Empty,Result,Space} = antd;
 
 let timeout = 1000;
 
@@ -134,11 +133,11 @@ render(<Preset/>);
 
 - 请求成功
 - 发送一个成功请求，内部组件拿到数据并展示数据
-- ReactFetch(@kne/react-fetch),AntdList(antd/lib/list)
+- ReactFetch(@kne/react-fetch),antd(antd)
 
 ```jsx
 const {createWithFetch} = ReactFetch;
-const {default: List} = AntdList;
+const {List} = antd;
 
 const Remote = createWithFetch({
     url: '/data1'
@@ -156,11 +155,11 @@ render(<Remote/>);
 
 - 使用Fetch组件发送请求
 - 使用Fetch组件发送一个成功请求，内部组件拿到数据并展示数据
-- ReactFetch(@kne/react-fetch),AntdList(antd/lib/list)
+- ReactFetch(@kne/react-fetch),antd(antd)
 
 ```jsx
 const {default: Fetch} = ReactFetch;
-const {default: List} = AntdList;
+const {List} = AntdList;
 
 const Remote = () => {
     return <Fetch url="/data1" loader={() => {
@@ -199,15 +198,12 @@ render(<Error/>);
 
 - 分页数据请求
 - 分页加载数据
-- ReactFetch(@kne/react-fetch),AntdButton(antd/lib/button),AntdPagination(antd/lib/pagination),AntdSpace(antd/lib/space),AntdList(antd/lib/list),_(lodash)
+- ReactFetch(@kne/react-fetch),antd(antd),_(lodash)
 
 ```jsx
 const {useState} = React;
 const {createWithFetch} = ReactFetch;
-const {default: Button} = AntdButton;
-const {default: Pagination} = AntdPagination;
-const {default: Space} = AntdSpace;
-const {default: List} = AntdList;
+const {Button,Pagination,Space,List} = antd;
 
 const Page = createWithFetch({
     url: '/data2',
@@ -247,14 +243,12 @@ render(<Remote/>);
 
 - 下拉加载更多
 - 下拉加载更多数据
-- ReactFetch(@kne/react-fetch),AntdButton(antd/lib/button),AntdPagination(antd/lib/pagination),AntdSpace(antd/lib/space),AntdList(antd/lib/list),_(lodash),AntdSpin(antd/lib/spin)
+- ReactFetch(@kne/react-fetch),antd(antd),_(lodash)
 
 ```jsx
 const {useEffect, forwardRef, useRef, useImperativeHandle} = React;
 const {createWithFetch} = ReactFetch;
-const {default: Space} = AntdSpace;
-const {default: List} = AntdList;
-const {default: Spin} = AntdSpin;
+const {Space,List,Spin} = antd;
 const {throttle} = _;
 
 const ScrollLoader = forwardRef(({
@@ -331,11 +325,11 @@ render(<Remote/>);
 
 - 空数据
 - 用isEmpty判断数据是不是空状态
-- ReactFetch(@kne/react-fetch),AntdList(antd/lib/list)
+- ReactFetch(@kne/react-fetch),antd(antd)
 
 ```jsx
 const {createWithFetch} = ReactFetch;
-const {default: List} = AntdList;
+const {List} = antd;
 
 const Remote = createWithFetch({
     url: '/data1',
@@ -379,7 +373,7 @@ render(<Example data={{name: 'jack'}}/>);
 
 - transform
 - 展示transformResponse的调用
-- ReactFetch(@kne/react-fetch),AntdList(antd/lib/list)
+- ReactFetch(@kne/react-fetch),antd(antd)
 
 ```jsx
 const {createWithFetch} = ReactFetch;
@@ -411,13 +405,12 @@ render(<Remote/>);
 
 - 缓存操作
 - 展示缓存操作
-- ReactFetch(@kne/react-fetch),AntdList(antd/lib/list),space(antd/lib/space),button(antd/lib/button)
+- ReactFetch(@kne/react-fetch),antd(antd)
 
 ```jsx
 const {createWithFetch, getCache} = ReactFetch;
-const {default: List} = AntdList;
-const {default: Space} = space;
-const {default: Button} = button;
+const {List,Space,Button} = antd;
+
 const {useRef} = React;
 
 const Remote = createWithFetch({

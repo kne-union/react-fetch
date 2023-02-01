@@ -1,13 +1,6 @@
-import * as component_91 from '@kne/react-fetch';
-import * as component_92 from 'antd/lib/input';
-import * as component_93 from 'antd/lib/spin';
-import * as component_94 from 'antd/lib/empty';
-import * as component_95 from 'antd/lib/result';
-import * as component_96 from 'antd/lib/space';
-import * as component_97 from 'lodash';
-import * as component_98 from 'antd/lib/list';
-import * as component_99 from 'antd/lib/button';
-import * as component_100 from 'antd/lib/pagination';
+import * as component_1 from '@kne/react-fetch';
+import * as component_2 from 'antd';
+import * as component_3 from 'lodash';
 const readmeConfig = {
     name: `@kne/react-fetch`,
     description: `用于获取数据的react组件`,
@@ -359,11 +352,7 @@ ajax为一个axios实例，每个实例的拦截器可能不同，默认会在�
 preset 可以单独放一个文件里，在入口文件顶部引入。
 preset全局设置一次即可。`,
     code: `const {preset} = ReactFetch;
-const {default: Input} = AntdInput;
-const {default: Spin} = AntdSpin;
-const {default: Empty} = AntdEmpty;
-const {default: Result} = AntdResult;
-const {default: Space} = AntdSpace;
+const {Input,Spin,Empty,Result,Space} = antd;
 
 let timeout = 1000;
 
@@ -437,37 +426,21 @@ render(<Preset/>);
     scope: [{
     name: "ReactFetch",
     packageName: "@kne/react-fetch",
-    component: component_91
+    component: component_1
 },{
-    name: "AntdInput",
-    packageName: "antd/lib/input",
-    component: component_92
-},{
-    name: "AntdSpin",
-    packageName: "antd/lib/spin",
-    component: component_93
-},{
-    name: "AntdEmpty",
-    packageName: "antd/lib/empty",
-    component: component_94
-},{
-    name: "AntdResult",
-    packageName: "antd/lib/result",
-    component: component_95
-},{
-    name: "AntdSpace",
-    packageName: "antd/lib/space",
-    component: component_96
+    name: "antd",
+    packageName: "antd",
+    component: component_2
 },{
     name: "_",
     packageName: "lodash",
-    component: component_97
+    component: component_3
 }]
 },{
     title: `请求成功`,
     description: `发送一个成功请求，内部组件拿到数据并展示数据`,
     code: `const {createWithFetch} = ReactFetch;
-const {default: List} = AntdList;
+const {List} = antd;
 
 const Remote = createWithFetch({
     url: '/data1'
@@ -485,17 +458,17 @@ render(<Remote/>);
     scope: [{
     name: "ReactFetch",
     packageName: "@kne/react-fetch",
-    component: component_91
+    component: component_1
 },{
-    name: "AntdList",
-    packageName: "antd/lib/list",
-    component: component_98
+    name: "antd",
+    packageName: "antd",
+    component: component_2
 }]
 },{
     title: `使用Fetch组件发送请求`,
     description: `使用Fetch组件发送一个成功请求，内部组件拿到数据并展示数据`,
     code: `const {default: Fetch} = ReactFetch;
-const {default: List} = AntdList;
+const {List} = AntdList;
 
 const Remote = () => {
     return <Fetch url="/data1" loader={() => {
@@ -517,11 +490,11 @@ render(<Remote/>);
     scope: [{
     name: "ReactFetch",
     packageName: "@kne/react-fetch",
-    component: component_91
+    component: component_1
 },{
-    name: "AntdList",
-    packageName: "antd/lib/list",
-    component: component_98
+    name: "antd",
+    packageName: "antd",
+    component: component_2
 }]
 },{
     title: `请求失败`,
@@ -540,17 +513,14 @@ render(<Error/>);
     scope: [{
     name: "ReactFetch",
     packageName: "@kne/react-fetch",
-    component: component_91
+    component: component_1
 }]
 },{
     title: `分页数据请求`,
     description: `分页加载数据`,
     code: `const {useState} = React;
 const {createWithFetch} = ReactFetch;
-const {default: Button} = AntdButton;
-const {default: Pagination} = AntdPagination;
-const {default: Space} = AntdSpace;
-const {default: List} = AntdList;
+const {Button,Pagination,Space,List} = antd;
 
 const Page = createWithFetch({
     url: '/data2',
@@ -590,36 +560,22 @@ render(<Remote/>);
     scope: [{
     name: "ReactFetch",
     packageName: "@kne/react-fetch",
-    component: component_91
+    component: component_1
 },{
-    name: "AntdButton",
-    packageName: "antd/lib/button",
-    component: component_99
-},{
-    name: "AntdPagination",
-    packageName: "antd/lib/pagination",
-    component: component_100
-},{
-    name: "AntdSpace",
-    packageName: "antd/lib/space",
-    component: component_96
-},{
-    name: "AntdList",
-    packageName: "antd/lib/list",
-    component: component_98
+    name: "antd",
+    packageName: "antd",
+    component: component_2
 },{
     name: "_",
     packageName: "lodash",
-    component: component_97
+    component: component_3
 }]
 },{
     title: `下拉加载更多`,
     description: `下拉加载更多数据`,
     code: `const {useEffect, forwardRef, useRef, useImperativeHandle} = React;
 const {createWithFetch} = ReactFetch;
-const {default: Space} = AntdSpace;
-const {default: List} = AntdList;
-const {default: Spin} = AntdSpin;
+const {Space,List,Spin} = antd;
 const {throttle} = _;
 
 const ScrollLoader = forwardRef(({
@@ -696,37 +652,21 @@ render(<Remote/>);
     scope: [{
     name: "ReactFetch",
     packageName: "@kne/react-fetch",
-    component: component_91
+    component: component_1
 },{
-    name: "AntdButton",
-    packageName: "antd/lib/button",
-    component: component_99
-},{
-    name: "AntdPagination",
-    packageName: "antd/lib/pagination",
-    component: component_100
-},{
-    name: "AntdSpace",
-    packageName: "antd/lib/space",
-    component: component_96
-},{
-    name: "AntdList",
-    packageName: "antd/lib/list",
-    component: component_98
+    name: "antd",
+    packageName: "antd",
+    component: component_2
 },{
     name: "_",
     packageName: "lodash",
-    component: component_97
-},{
-    name: "AntdSpin",
-    packageName: "antd/lib/spin",
-    component: component_93
+    component: component_3
 }]
 },{
     title: `空数据`,
     description: `用isEmpty判断数据是不是空状态`,
     code: `const {createWithFetch} = ReactFetch;
-const {default: List} = AntdList;
+const {List} = antd;
 
 const Remote = createWithFetch({
     url: '/data1',
@@ -745,11 +685,11 @@ render(<Remote/>);
     scope: [{
     name: "ReactFetch",
     packageName: "@kne/react-fetch",
-    component: component_91
+    component: component_1
 },{
-    name: "AntdList",
-    packageName: "antd/lib/list",
-    component: component_98
+    name: "antd",
+    packageName: "antd",
+    component: component_2
 }]
 },{
     title: `用loader加载数据`,
@@ -776,7 +716,7 @@ render(<Example data={{name: 'jack'}}/>);
     scope: [{
     name: "ReactFetch",
     packageName: "@kne/react-fetch",
-    component: component_91
+    component: component_1
 }]
 },{
     title: `transform`,
@@ -810,19 +750,18 @@ render(<Remote/>);
     scope: [{
     name: "ReactFetch",
     packageName: "@kne/react-fetch",
-    component: component_91
+    component: component_1
 },{
-    name: "AntdList",
-    packageName: "antd/lib/list",
-    component: component_98
+    name: "antd",
+    packageName: "antd",
+    component: component_2
 }]
 },{
     title: `缓存操作`,
     description: `展示缓存操作`,
     code: `const {createWithFetch, getCache} = ReactFetch;
-const {default: List} = AntdList;
-const {default: Space} = space;
-const {default: Button} = button;
+const {List,Space,Button} = antd;
+
 const {useRef} = React;
 
 const Remote = createWithFetch({
@@ -859,19 +798,11 @@ render(<Example/>);
     scope: [{
     name: "ReactFetch",
     packageName: "@kne/react-fetch",
-    component: component_91
+    component: component_1
 },{
-    name: "AntdList",
-    packageName: "antd/lib/list",
-    component: component_98
-},{
-    name: "space",
-    packageName: "antd/lib/space",
-    component: component_96
-},{
-    name: "button",
-    packageName: "antd/lib/button",
-    component: component_99
+    name: "antd",
+    packageName: "antd",
+    component: component_2
 }]
 }]
     }

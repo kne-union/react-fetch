@@ -1,5 +1,5 @@
 const {default: Fetch} = ReactFetch;
-const {default: List} = AntdList;
+const {List} = AntdList;
 
 const Remote = () => {
     return <Fetch url="/data1" loader={() => {

@@ -1,8 +1,6 @@
 const {useEffect, forwardRef, useRef, useImperativeHandle} = React;
 const {createWithFetch} = ReactFetch;
-const {default: Space} = AntdSpace;
-const {default: List} = AntdList;
-const {default: Spin} = AntdSpin;
+const {Space,List,Spin} = antd;
 const {throttle} = _;
 
 const ScrollLoader = forwardRef(({

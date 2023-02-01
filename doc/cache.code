@@ -1,7 +1,6 @@
 const {createWithFetch, getCache} = ReactFetch;
-const {default: List} = AntdList;
-const {default: Space} = space;
-const {default: Button} = button;
+const {List,Space,Button} = antd;
+
 const {useRef} = React;
 
 const Remote = createWithFetch({

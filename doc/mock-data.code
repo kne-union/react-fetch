@@ -1,9 +1,5 @@
 const {preset} = ReactFetch;
-const {default: Input} = AntdInput;
-const {default: Spin} = AntdSpin;
-const {default: Empty} = AntdEmpty;
-const {default: Result} = AntdResult;
-const {default: Space} = AntdSpace;
+const {Input,Spin,Empty,Result,Space} = antd;
 
 let timeout = 1000;
 

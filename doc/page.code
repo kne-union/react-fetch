@@ -1,9 +1,6 @@
 const {useState} = React;
 const {createWithFetch} = ReactFetch;
-const {default: Button} = AntdButton;
-const {default: Pagination} = AntdPagination;
-const {default: Space} = AntdSpace;
-const {default: List} = AntdList;
+const {Button,Pagination,Space,List} = antd;
 
 const Page = createWithFetch({
     url: '/data2',
