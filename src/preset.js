@@ -1,29 +1,32 @@
 import axios from 'axios';
-import withAxios from './axiosCache/index';
+import Cache from './Cache';
 
 export const globalParams = {
-  ajax: axios.create(),
-  createConfig: null,
-  loading: null,
-  error: null,
-  empty: null,
-  transformResponse: (response) => {
-    const { data } = response;
-    response.data = {
-      code: data.code,
-      msg: data.msg,
-      results: data.results
-    };
-    return response;
-  }
+    cache: new Cache({ttl: 1000 * 60 * 10, maxLength: 1000, isLocal: true}),
+    ajax: axios.create(),
+    loading: null,
+    error: null,
+    empty: null,
+    pagination: {
+        initCurrent: 1,
+        pageSize: 10,
+        transform: (params) => params
+    },
+    transformResponse: (response) => {
+        const {data} = response;
+        response.data = {
+            code: data.code,
+            msg: data.msg,
+            results: data.results
+        };
+        return response;
+    }
 };
 
-export let instance = withAxios(globalParams.ajax, globalParams);
+export const getCache = () => globalParams.cache;
 
 export default (newOptions) => {
-  let newParams = Object.assign(globalParams, newOptions);
-  instance = withAxios(newParams.ajax, newParams);
-  return newParams;
+    return Object.assign(globalParams, newOptions);
 };
 
 
