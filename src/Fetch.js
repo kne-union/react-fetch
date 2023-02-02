@@ -6,23 +6,14 @@ import {globalParams} from './preset';
 
 const Fetch = forwardRef(({component, render, loading, isEmpty, empty, error: errorComponent, ...props}, ref) => {
     const {
-        isLoading,
-        isComplete,
-        data,
-        requestParams,
-        error,
-        send,
-        refresh,
-        reload,
-        loadMore,
-        setData
+        isLoading, isComplete, data, requestParams, error, send, refresh, reload, loadMore, setData
     } = useFetch(props);
     const fetchPropsList = ['url', 'params', 'method', 'data', 'cache', 'ttl', 'isLocal', 'auto', 'loader', 'options', 'updateType', 'onRequestError', 'onRequestSuccess', 'onRequestComplete', 'onRequestStart', 'debug', 'ajax', 'transformResponse'];
     const otherProps = omit(props, fetchPropsList);
     const fetchProps = pick(props, fetchPropsList);
     useImperativeHandle(ref, () => {
         return {
-            isLoading, isComplete, data, error, send, refresh, reload, loadMore, setData
+            isLoading, isComplete, data, requestParams, error, send, refresh, reload, loadMore, setData
         };
     });
     if (isLoading) {
@@ -54,16 +45,7 @@ const Fetch = forwardRef(({component, render, loading, isEmpty, empty, error: er
 
     if (render) {
         return render({
-            ...otherProps,
-            fetchProps,
-            isComplete,
-            data,
-            refresh,
-            reload,
-            setData,
-            loadMore,
-            send,
-            requestParams
+            ...otherProps, fetchProps, isComplete, data, refresh, reload, setData, loadMore, send, requestParams
         });
     }
 
