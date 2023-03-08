@@ -4,7 +4,7 @@ import get from 'lodash/get';
 export default {
     id: 'request',
     plugin: ({force}, context) => {
-        if (context.outputStack['loader']) {
+        if (context.outputStack['loader'] || context.errorStack['loader']) {
             return;
         }
         if (context.outputStack['cache']) {
