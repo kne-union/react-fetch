@@ -1,9 +1,8 @@
 export default {
-    id: 'load-more',
-    plugin: ({type, callback}, context) => {
+    id: 'load-more', plugin: ({type, callback}, context) => {
+        const {fetchData} = context.componentContext.getState();
         if (type === 'load-more' && typeof callback === 'function') {
-            return callback(context.componentContext.data, context.output);
+            return callback(fetchData, context.output);
         }
-    },
-    dependencies: ['output-data']
+    }, dependencies: ['output-data']
 };
