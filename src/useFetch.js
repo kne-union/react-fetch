@@ -38,6 +38,7 @@ const useFetch = (fetcherOptions) => {
         pluginRunnerRef.current = createRunner({
             getProps: () => propsRef.current,
             getRequestToken: () => requestTokenRef.current,
+            getState: () => stateRef.current,
             requestParams,
             setRequestParams,
             setFetchData,
