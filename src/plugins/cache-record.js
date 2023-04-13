@@ -7,7 +7,7 @@ export default {
         const token = context.componentContext.getRequestToken();
         const cacheName = cache === true ? '' : cache;
         const cacheKey = cacheName + token;
-        if (cache && context.outputStack['request'] && context.outputStack['output-data'] !== void (0)) {
+        if (cache && context.outputStack['output-data'] !== void (0)) {
             globalParams.cache.put(cacheKey, context.outputStack['request'], {ttl, isLocal, cacheName});
         }
     },
