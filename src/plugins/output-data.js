@@ -1,6 +1,6 @@
 export default {
     id: 'output-data', plugin: (props, context) => {
-        const {onRequestSuccess} = context.componentContext.getProps();
+        const {onRequestSuccess, transformData} = context.componentContext.getProps();
         if (Object.keys(context.errorStack).length > 0) {
             return;
         }
@@ -10,7 +10,7 @@ export default {
             error.responseData = responseData;
             throw error;
         }
-        const output = responseData.results || {};
+        const output = ((output) => typeof transformData === 'function' ? transformData(output) : output)(responseData.results || {});
         onRequestSuccess && onRequestSuccess(output);
         return output;
     }, dependencies: ['request']
