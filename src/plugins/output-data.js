@@ -10,7 +10,7 @@ export default {
             error.responseData = responseData;
             throw error;
         }
-        const output = ((output) => typeof transformData === 'function' ? transformData(output) : output)(responseData.results || {});
+        const output = ((output) => typeof transformData === 'function' ? transformData(output, context.outputStack['params']) : output)(responseData.results || {});
         onRequestSuccess && onRequestSuccess(output);
         return output;
     }, dependencies: ['request']
