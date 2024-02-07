@@ -7,12 +7,10 @@
   "source": "src/index.js",
   "scripts": {
     "init-example": "modules-dev-libs-init",
-    "start": "run-p start:lib start:md start:example",
-    "build": "run-s build:lib build:md build:example",
-    "build:lib": "microbundle --no-compress --format modern,cjs --jsx React.createElement --jsxFragment React.Fragment",
-    "build:md": "create-md",
-    "start:md": "create-md --watch",
-    "start:lib": "microbundle watch --no-compress --format modern,cjs --jsx React.createElement --jsxFragment React.Fragment",
+    "start": "run-p start:lib start:example",
+    "build": "run-s build:lib build:example",
+    "build:lib": "microbundle --no-compress --format modern,cjs --jsx React.createElement",
+    "start:lib": "microbundle watch --no-compress --format modern,cjs --jsx React.createElement",
     "test": "run-s test:unit test:lint test:build",
     "test:build": "run-s build",
     "test:lint": "eslint .",
@@ -20,8 +18,8 @@
     "test:watch": "react-scripts test --env=jsdom",
     "build:example": "cd example && npm run build",
     "start:example": "cd example && npm run start",
-    "deploy": "gh-pages -d example/build",
-    "prettier": "prettier --config .prettierrc --write 'src/**/*.{js,jsx,ts,tsx,json,css,scss,md}'"
+    "lint-staged": "lint-staged",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -33,7 +31,7 @@
     }
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+    "src/**/*.{js,jsx,ts,tsx,json,css,scss}": [
       "prettier --config .prettierrc --write",
       "git add"
     ]
