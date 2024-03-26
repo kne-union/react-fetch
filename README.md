@@ -80,6 +80,16 @@ preset({
                     });
                     return;
                 }
+                if (config.url === '/data3') {
+                    console.log('data1 request');
+                    resolve({
+                        data: [
+                            {title: '数据一'},
+                            {title: '数据二'}
+                        ]
+                    });
+                    return;
+                }
                 if (config.url === '/data2') {
                     resolve({
                         data: {
@@ -377,7 +387,7 @@ render(<Example data={{name: 'jack'}}/>);
 
 ```jsx
 const {createWithFetch} = ReactFetch;
-const {default: List} = AntdList;
+const {List} = antd;
 
 const Remote = createWithFetch({
     url: '/data1',
@@ -445,6 +455,52 @@ render(<Example/>);
 
 ```
 
+- 忽略请求成功状态
+- 发送一个成功请求，内部组件拿到数据并展示数据
+- ReactFetch(@kne/react-fetch),antd(antd)
+
+```jsx
+const {createWithFetch} = ReactFetch;
+const {List} = antd;
+
+const Remote = createWithFetch({
+    url: '/data3', ignoreSuccessState: true
+})(({data}) => {
+    return <List bordered>
+        {data.map((item, index) => {
+            return <List.Item key={index}>{item.title}</List.Item>
+        })}
+    </List>;
+});
+
+render(<Remote/>);
+
+```
+
+- url params
+- 发送一个成功请求，内部组件拿到数据并展示数据
+- ReactFetch(@kne/react-fetch),antd(antd)
+
+```jsx
+const {createWithFetch} = ReactFetch;
+const {List} = antd;
+
+const Remote = createWithFetch({
+    url: '/data{id}', urlParams: {
+        id: 1
+    }
+})(({data}) => {
+    return <List bordered>
+        {data.map((item, index) => {
+            return <List.Item key={index}>{item.title}</List.Item>
+        })}
+    </List>;
+});
+
+render(<Remote/>);
+
+```
+
 
 ### API
 
@@ -484,18 +540,20 @@ React Hooks
 
 options:
 
-| 属性名               | 说明                                                                       | 类型       | 默认值   |
-|-------------------|--------------------------------------------------------------------------|----------|-------|
-| url               | 需要请求接口的url                                                               | string   | -     |
-| data              | POST请求的data                                                              | object   | -     |
-| params            | GET请求的query                                                              | object   | -     |
-| options           | 请求的其他参数，如method,headers等，详细请参考[axios](https://github.com/axios/axios)    | object   | -     |
-| auto              | 是否自动发送请求，如果为false需要手动调用refresh方法才会发送请求，并且url,data,options发生变化后不会自动发送新的请求 | boolean  | true  |
-| debug             | 是否开启调试，开启以后可以在控制台打印整个组件的plugin执行堆栈，可以帮助排查问题                              | boolean  | false |
-| onRequestStart    | 请求开始时回调方法                                                                | function | -     |
-| onRequestError    | 请求发生错误时回调方法                                                              | function | -     |
-| onRequestSuccess  | 请求成功时回调方法                                                                | function | -     |
-| onRequestComplete | 请求完成时（包括成功和失败）的回调方法                                                      | function | -     |
+| 属性名                | 说明                                                                         | 类型       | 默认值   |
+|--------------------|----------------------------------------------------------------------------|----------|-------|
+| url                | 需要请求接口的url                                                                 | string   | -     |
+| data               | POST请求的data                                                                | object   | -     |
+| params             | GET请求的query                                                                | object   | -     |
+| options            | 请求的其他参数，如method,headers等，详细请参考[axios](https://github.com/axios/axios)      | object   | -     |
+| urlParams          | url模板参数,当url为 /example/{id}且传入urlParams为{id:123},真正发出请求的url为: /example/123 | object   | -     |
+| ignoreSuccessState | 当且仅当该参数为true时在output阶段不再判断返回数据的code===200为请求成功，且返回data不再取results而是返回data本身 | boolean  | -     |
+| auto               | 是否自动发送请求，如果为false需要手动调用refresh方法才会发送请求，并且url,data,options发生变化后不会自动发送新的请求   | boolean  | true  |
+| debug              | 是否开启调试，开启以后可以在控制台打印整个组件的plugin执行堆栈，可以帮助排查问题                                | boolean  | false |
+| onRequestStart     | 请求开始时回调方法                                                                  | function | -     |
+| onRequestError     | 请求发生错误时回调方法                                                                | function | -     |
+| onRequestSuccess   | 请求成功时回调方法                                                                  | function | -     |
+| onRequestComplete  | 请求完成时（包括成功和失败）的回调方法                                                        | function | -     |
 
 返回值
 
@@ -532,4 +590,14 @@ Fetch options
 | cache   | 为true或者为字符串的时候为开启缓存，如果请求参数完全一致则命中缓存。如果cache为字符串，只有cahce一致的组件之间会命中缓存 | boolean&#124;string | -     |
 | ttl     | 缓存失效时间，为0的时候不失效，单位为毫秒                                               | number              | 0     |
 | isLocal | 缓存是否存储到localStorge                                                  | bool                | false |
+
+### request
+
+导出一个行为，参数和Fetch一致的方法，调用后发送一个ajax请求
+
+使用方法
+
+```js
+request(props)
+```
 
