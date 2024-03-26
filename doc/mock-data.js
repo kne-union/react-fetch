@@ -20,6 +20,16 @@ preset({
                     });
                     return;
                 }
+                if (config.url === '/data3') {
+                    console.log('data1 request');
+                    resolve({
+                        data: [
+                            {title: '数据一'},
+                            {title: '数据二'}
+                        ]
+                    });
+                    return;
+                }
                 if (config.url === '/data2') {
                     resolve({
                         data: {

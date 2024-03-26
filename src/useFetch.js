@@ -1,12 +1,10 @@
 import {useRef, useEffect, useState, useMemo} from 'react';
-import objectHash from "object-hash";
 import {createRunner} from './plugins';
-import pick from 'lodash/pick';
+import getRequestToken from './getRequestToken';
 
 const useFetch = (fetcherOptions) => {
     const props = Object.assign({
-        auto: true,
-        updateType: 'reload'
+        auto: true, updateType: 'reload'
     }, fetcherOptions);
 
     const propsRef = useRef(props);
@@ -25,10 +23,7 @@ const useFetch = (fetcherOptions) => {
         isLoading, isComplete, fetchData, error, requestParams
     };
 
-    const requestToken = objectHash(pick(props, ['url', 'params', 'method', 'data', 'options']), {
-        algorithm: 'md5',
-        encoding: 'base64'
-    });
+    const requestToken = getRequestToken(props);
     const requestTokenRef = useRef(requestToken);
     requestTokenRef.current = requestToken;
 
@@ -76,8 +71,16 @@ const useFetch = (fetcherOptions) => {
     }, [requestToken]);
 
     return {
-        isLoading, isComplete, data: fetchData, error,
-        send, refresh, reload, loadMore, setData: setFetchData, requestParams
+        isLoading,
+        isComplete,
+        data: fetchData,
+        error,
+        send,
+        refresh,
+        reload,
+        loadMore,
+        setData: setFetchData,
+        requestParams
     };
 };
 

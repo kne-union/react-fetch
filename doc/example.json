@@ -4,7 +4,7 @@
     {
       "title": "preset设置",
       "description": "注意：react-fetch 内部处理请求的时候只通过 code,msg,results来作为内部逻辑，code为200判定为请求成功，不为200时判定为错误，msg会传入到error组件，拿到results后，会将results作为业务组件的data属性\n如果后端的返回不满足上诉格式，需要在preset的transformResponse方法做转换适配\najax为一个axios实例，每个实例的拦截器可能不同，默认会在内部自动创建一个axios实例，但是没有任何拦截器，如果想给其添加拦截器，可以自行创建axios实例通过preset设置\npreset 可以单独放一个文件里，在入口文件顶部引入。\npreset全局设置一次即可。",
-      "code": "./mock-data.code",
+      "code": "./mock-data.js",
       "scope": [
         {
           "name": "ReactFetch",
@@ -23,7 +23,7 @@
     {
       "title": "请求成功",
       "description": "发送一个成功请求，内部组件拿到数据并展示数据",
-      "code": "./base.code",
+      "code": "./base.js",
       "scope": [
         {
           "name": "ReactFetch",
@@ -38,7 +38,7 @@
     {
       "title": "使用Fetch组件发送请求",
       "description": "使用Fetch组件发送一个成功请求，内部组件拿到数据并展示数据",
-      "code": "./fetch.code",
+      "code": "./fetch.js",
       "scope": [
         {
           "name": "ReactFetch",
@@ -53,7 +53,7 @@
     {
       "title": "请求失败",
       "description": "发送一个失败请求，内部组件不渲染，直接展示错误信息",
-      "code": "./error.code",
+      "code": "./error.js",
       "scope": [
         {
           "name": "ReactFetch",
@@ -64,7 +64,7 @@
     {
       "title": "分页数据请求",
       "description": "分页加载数据",
-      "code": "./page.code",
+      "code": "./page.js",
       "scope": [
         {
           "name": "ReactFetch",
@@ -83,7 +83,7 @@
     {
       "title": "下拉加载更多",
       "description": "下拉加载更多数据",
-      "code": "./load-more.code",
+      "code": "./load-more.js",
       "scope": [
         {
           "name": "ReactFetch",
@@ -102,7 +102,7 @@
     {
       "title": "空数据",
       "description": "用isEmpty判断数据是不是空状态",
-      "code": "./empty.code",
+      "code": "./empty.js",
       "scope": [
         {
           "name": "ReactFetch",
@@ -117,7 +117,7 @@
     {
       "title": "用loader加载数据",
       "description": "展示了用loader来加载数据的例子",
-      "code": "./loader.code",
+      "code": "./loader.js",
       "scope": [
         {
           "name": "ReactFetch",
@@ -128,7 +128,7 @@
     {
       "title": "transform",
       "description": "展示transformResponse的调用",
-      "code": "./transform.code",
+      "code": "./transform.js",
       "scope": [
         {
           "name": "ReactFetch",
@@ -143,7 +143,37 @@
     {
       "title": "缓存操作",
       "description": "展示缓存操作",
-      "code": "./cache.code",
+      "code": "./cache.js",
+      "scope": [
+        {
+          "name": "ReactFetch",
+          "packageName": "@kne/react-fetch"
+        },
+        {
+          "name": "antd",
+          "packageName": "antd"
+        }
+      ]
+    },
+    {
+      "title": "忽略请求成功状态",
+      "description": "发送一个成功请求，内部组件拿到数据并展示数据",
+      "code": "./ignore-success-state.js",
+      "scope": [
+        {
+          "name": "ReactFetch",
+          "packageName": "@kne/react-fetch"
+        },
+        {
+          "name": "antd",
+          "packageName": "antd"
+        }
+      ]
+    },
+    {
+      "title": "url params",
+      "description": "发送一个成功请求，内部组件拿到数据并展示数据",
+      "code": "./url-params.js",
       "scope": [
         {
           "name": "ReactFetch",

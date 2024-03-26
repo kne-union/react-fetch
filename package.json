@@ -1,25 +1,30 @@
 {
   "name": "@kne/react-fetch",
-  "version": "1.4.3",
+  "version": "1.5.0",
   "description": "用于获取数据的react组件",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.js",
+  "syntax": {
+    "esmodules": true
+  },
   "scripts": {
+    "init": "husky && npm run init-example",
+    "start": "run-p start:lib start:md start:example",
+    "build": "run-s build:lib build:md build:example",
     "init-example": "modules-dev-libs-init",
-    "start": "run-p start:lib start:example",
-    "build": "run-s build:lib build:example",
-    "build:lib": "microbundle --no-compress --format modern,cjs --jsx React.createElement",
-    "start:lib": "microbundle watch --no-compress --format modern,cjs --jsx React.createElement",
-    "test": "run-s test:unit test:lint test:build",
+    "build:md": "npx @kne/md-doc",
+    "start:md": "npx @kne/md-doc --watch",
+    "build:lib": "microbundle --no-compress --format modern,cjs --jsx React.createElement --jsxFragment React.Fragment",
+    "start:lib": "microbundle watch --no-compress --format modern,cjs --jsx React.createElement --jsxFragment React.Fragment",
+    "build:example": "cd example && npm run build",
+    "start:example": "cd example && npm run start",
     "test:build": "run-s build",
     "test:lint": "eslint .",
     "test:unit": "cross-env CI=1 react-scripts test --env=jsdom",
     "test:watch": "react-scripts test --env=jsdom",
-    "build:example": "cd example && npm run build",
-    "start:example": "cd example && npm run start",
-    "lint-staged": "lint-staged",
-    "prepare": "husky install"
+    "prettier": "prettier --config .prettierrc --write '{src/**/*,index,prompts}.{js,jsx,ts,tsx,json,css,scss}'",
+    "lint-staged": "npx lint-staged"
   },
   "repository": {
     "type": "git",
@@ -51,19 +56,14 @@
     "react-dom": ">=16.x"
   },
   "devDependencies": {
-    "@craco/craco": "^7.1.0",
-    "@kne/md-doc": "^0.1.2",
-    "@kne/microbundle": "^0.15.4",
-    "@kne/modules-dev": "^2.0.5",
-    "axios": "^0.26.1",
+    "@kne/microbundle": "^0.15.5",
+    "@kne/modules-dev": "^2.0.14",
     "cross-env": "^7.0.3",
-    "gh-pages": "^3.2.3",
-    "husky": "^7.0.4",
+    "husky": "^9.0.11",
     "npm-run-all": "^4.1.5",
-    "prettier": "^2.5.1",
+    "prettier": "^3.2.5",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-scripts": "^5.0.1"
+    "react-dom": "^18.2.0"
   },
   "dependencies": {
     "lodash": "^4.17.21",
