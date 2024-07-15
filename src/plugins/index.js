@@ -16,6 +16,7 @@ const globalContext = {};
 
 export const createRunner = (componentContext) => {
     return async (props) => {
+        props = Object.assign({}, props);
         const allPlugins = plugins;
         const pluginContext = {
             props,
