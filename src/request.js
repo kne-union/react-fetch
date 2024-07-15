@@ -4,7 +4,7 @@ import getRequestToken from './getRequestToken';
 const request = (props) => {
     const {
         onRequestParamsChange, onRequestDataChange, onError, onIsCompleteChange, onIsLoadingChange, ...requestProps
-    } = Object.assign({}, props, {options: Object.assign({}, {ignoreSuccessState: true}, props?.options)});
+    } = Object.assign({}, props, {options: Object.assign({}, {ignoreSuccessState: true}, props?.options, {type: 'refresh'})});
     return createRunner({
         getProps: () => requestProps,
         getRequestToken: () => getRequestToken(requestProps),
