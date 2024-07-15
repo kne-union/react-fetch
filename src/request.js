@@ -16,7 +16,9 @@ const request = (props) => {
         setError: (...args) => onError && onError(...args),
         setIsComplete: (...args) => onIsCompleteChange && onIsCompleteChange(...args),
         setIsLoading: (...args) => onIsLoadingChange && onIsLoadingChange(...args)
-    })({});
+    })({}).then(({outputStack}) => {
+        return outputStack['transform-response'];
+    });
 };
 
 export default request;
