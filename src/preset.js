@@ -16,6 +16,8 @@ export const globalParams = {
 
 export const getCache = () => globalParams.cache;
 
+export const getAjax = () => globalParams.ajax;
+
 export default (newOptions) => {
     return Object.assign(globalParams, newOptions);
 };
