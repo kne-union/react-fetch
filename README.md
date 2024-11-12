@@ -55,7 +55,7 @@ npm i --save @kne/react-fetch
 ajax为一个axios实例，每个实例的拦截器可能不同，默认会在内部自动创建一个axios实例，但是没有任何拦截器，如果想给其添加拦截器，可以自行创建axios实例通过preset设置
 preset 可以单独放一个文件里，在入口文件顶部引入。
 preset全局设置一次即可。
-- ReactFetch(@kne/react-fetch),antd(antd),_(lodash)
+- ReactFetch(@kne/current-lib_react-fetch),antd(antd),_(lodash)
 
 ```jsx
 const {preset} = ReactFetch;
@@ -143,7 +143,7 @@ render(<Preset/>);
 
 - 请求成功
 - 发送一个成功请求，内部组件拿到数据并展示数据
-- ReactFetch(@kne/react-fetch),antd(antd)
+- ReactFetch(@kne/current-lib_react-fetch),antd(antd)
 
 ```jsx
 const {createWithFetch} = ReactFetch;
@@ -165,7 +165,7 @@ render(<Remote/>);
 
 - 使用Fetch组件发送请求
 - 使用Fetch组件发送一个成功请求，内部组件拿到数据并展示数据
-- ReactFetch(@kne/react-fetch),antd(antd)
+- ReactFetch(@kne/current-lib_react-fetch),antd(antd)
 
 ```jsx
 const {default: Fetch} = ReactFetch;
@@ -191,7 +191,7 @@ render(<Remote/>);
 
 - 请求失败
 - 发送一个失败请求，内部组件不渲染，直接展示错误信息
-- ReactFetch(@kne/react-fetch)
+- ReactFetch(@kne/current-lib_react-fetch)
 
 ```jsx
 const {createWithFetch} = ReactFetch;
@@ -208,7 +208,7 @@ render(<Error/>);
 
 - 分页数据请求
 - 分页加载数据
-- ReactFetch(@kne/react-fetch),antd(antd),_(lodash)
+- ReactFetch(@kne/current-lib_react-fetch),antd(antd),_(lodash)
 
 ```jsx
 const {useState} = React;
@@ -253,7 +253,7 @@ render(<Remote/>);
 
 - 下拉加载更多
 - 下拉加载更多数据
-- ReactFetch(@kne/react-fetch),antd(antd),_(lodash)
+- ReactFetch(@kne/current-lib_react-fetch),antd(antd),_(lodash)
 
 ```jsx
 const {useEffect, forwardRef, useRef, useImperativeHandle} = React;
@@ -335,7 +335,7 @@ render(<Remote/>);
 
 - 空数据
 - 用isEmpty判断数据是不是空状态
-- ReactFetch(@kne/react-fetch),antd(antd)
+- ReactFetch(@kne/current-lib_react-fetch),antd(antd)
 
 ```jsx
 const {createWithFetch} = ReactFetch;
@@ -358,7 +358,7 @@ render(<Remote/>);
 
 - 用loader加载数据
 - 展示了用loader来加载数据的例子
-- ReactFetch(@kne/react-fetch)
+- ReactFetch(@kne/current-lib_react-fetch)
 
 ```jsx
 const {createWithFetch} = ReactFetch;
@@ -383,7 +383,7 @@ render(<Example data={{name: 'jack'}}/>);
 
 - transform
 - 展示transformResponse的调用
-- ReactFetch(@kne/react-fetch),antd(antd)
+- ReactFetch(@kne/current-lib_react-fetch),antd(antd)
 
 ```jsx
 const {createWithFetch} = ReactFetch;
@@ -415,7 +415,7 @@ render(<Remote/>);
 
 - 缓存操作
 - 展示缓存操作
-- ReactFetch(@kne/react-fetch),antd(antd)
+- ReactFetch(@kne/current-lib_react-fetch),antd(antd)
 
 ```jsx
 const {createWithFetch, getCache} = ReactFetch;
@@ -457,7 +457,7 @@ render(<Example/>);
 
 - 忽略请求成功状态
 - 发送一个成功请求，内部组件拿到数据并展示数据
-- ReactFetch(@kne/react-fetch),antd(antd)
+- ReactFetch(@kne/current-lib_react-fetch),antd(antd)
 
 ```jsx
 const {createWithFetch} = ReactFetch;
@@ -479,7 +479,7 @@ render(<Remote/>);
 
 - url params
 - 发送一个成功请求，内部组件拿到数据并展示数据
-- ReactFetch(@kne/react-fetch),antd(antd)
+- ReactFetch(@kne/current-lib_react-fetch),antd(antd)
 
 ```jsx
 const {createWithFetch} = ReactFetch;

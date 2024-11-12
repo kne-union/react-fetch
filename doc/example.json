@@ -8,7 +8,7 @@
       "scope": [
         {
           "name": "ReactFetch",
-          "packageName": "@kne/react-fetch"
+          "packageName": "@kne/current-lib_react-fetch"
         },
         {
           "name": "antd",
@@ -27,7 +27,7 @@
       "scope": [
         {
           "name": "ReactFetch",
-          "packageName": "@kne/react-fetch"
+          "packageName": "@kne/current-lib_react-fetch"
         },
         {
           "name": "antd",
@@ -42,7 +42,7 @@
       "scope": [
         {
           "name": "ReactFetch",
-          "packageName": "@kne/react-fetch"
+          "packageName": "@kne/current-lib_react-fetch"
         },
         {
           "name": "antd",
@@ -57,7 +57,7 @@
       "scope": [
         {
           "name": "ReactFetch",
-          "packageName": "@kne/react-fetch"
+          "packageName": "@kne/current-lib_react-fetch"
         }
       ]
     },
@@ -68,7 +68,7 @@
       "scope": [
         {
           "name": "ReactFetch",
-          "packageName": "@kne/react-fetch"
+          "packageName": "@kne/current-lib_react-fetch"
         },
         {
           "name": "antd",
@@ -87,7 +87,7 @@
       "scope": [
         {
           "name": "ReactFetch",
-          "packageName": "@kne/react-fetch"
+          "packageName": "@kne/current-lib_react-fetch"
         },
         {
           "name": "antd",
@@ -106,7 +106,7 @@
       "scope": [
         {
           "name": "ReactFetch",
-          "packageName": "@kne/react-fetch"
+          "packageName": "@kne/current-lib_react-fetch"
         },
         {
           "name": "antd",
@@ -121,7 +121,7 @@
       "scope": [
         {
           "name": "ReactFetch",
-          "packageName": "@kne/react-fetch"
+          "packageName": "@kne/current-lib_react-fetch"
         }
       ]
     },
@@ -132,7 +132,7 @@
       "scope": [
         {
           "name": "ReactFetch",
-          "packageName": "@kne/react-fetch"
+          "packageName": "@kne/current-lib_react-fetch"
         },
         {
           "name": "antd",
@@ -147,7 +147,7 @@
       "scope": [
         {
           "name": "ReactFetch",
-          "packageName": "@kne/react-fetch"
+          "packageName": "@kne/current-lib_react-fetch"
         },
         {
           "name": "antd",
@@ -162,7 +162,7 @@
       "scope": [
         {
           "name": "ReactFetch",
-          "packageName": "@kne/react-fetch"
+          "packageName": "@kne/current-lib_react-fetch"
         },
         {
           "name": "antd",
@@ -177,7 +177,7 @@
       "scope": [
         {
           "name": "ReactFetch",
-          "packageName": "@kne/react-fetch"
+          "packageName": "@kne/current-lib_react-fetch"
         },
         {
           "name": "antd",
