@@ -1,6 +1,6 @@
 {
   "name": "@kne/react-fetch",
-  "version": "1.5.4",
+  "version": "1.5.5",
   "description": "用于获取数据的react组件",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
