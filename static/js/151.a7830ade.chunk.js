@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunk_react_fetch_1_5_7=self.webpackChunk_react_fetch_1_5_7||[]).push([[151],{8151(e,c,t){t.r(c);const a={ReactFetch:t(69666).A};t.d(c,["default",0,a,"manifest",0,{name:"react-fetch",version:"1.5.7","open-version":!0,"public-url":"/react-fetch",modules:[{name:"react-fetch",baseDir:"/home/runner/work/react-fetch/react-fetch",description:"\u7528\u4e8e\u83b7\u53d6\u6570\u636e\u7684react\u7ec4\u4ef6",packageName:"@kne/react-fetch"}]}])}}]);
+//# sourceMappingURL=151.a7830ade.chunk.js.map
