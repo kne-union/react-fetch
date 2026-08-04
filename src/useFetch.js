@@ -61,12 +61,16 @@ const useFetch = (fetcherOptions) => {
         send, refresh, reload, loadMore, setData: setFetchData
     };
     useEffect(() => {
-        if (propsRef.current.auto) {
-            if (stateRef.current.isComplete) {
-                apiRef.current.send({type: propsRef.current.updateType}, false);
-            } else {
-                apiRef.current.refresh({}, false);
-            }
+        if (!propsRef.current.auto) {
+            return;
+        }
+        // requestToken 变化默认走 updateType（reload），保留旧 data，避免请求未完成时强制 refresh 卸掉子树白屏；
+        // 仅真正首包（尚无 data）用 refresh 展示 loading。
+        const {fetchData, isComplete} = stateRef.current;
+        if (fetchData != null || isComplete) {
+            apiRef.current.send({type: propsRef.current.updateType}, false);
+        } else {
+            apiRef.current.refresh({}, false);
         }
     }, [requestToken]);
 
