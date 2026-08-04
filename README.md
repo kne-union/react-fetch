@@ -1,18 +1,14 @@
-
 # react-fetch
-
 
 ### 描述
 
 用于获取数据的react组件
-
 
 ### 安装
 
 ```shell
 npm i --save @kne/react-fetch
 ```
-
 
 ### 概述
 
@@ -28,7 +24,6 @@ npm i --save @kne/react-fetch
 
 
 ### 示例
-
 
 #### 示例样式
 
@@ -501,7 +496,6 @@ render(<Remote/>);
 
 ```
 
-
 ### API
 
 #### Fetch
@@ -600,4 +594,3 @@ Fetch options
 ```js
 request(props)
 ```
-
